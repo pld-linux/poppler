@@ -1,12 +1,13 @@
---- poppler-0.1.1/poppler/Makefile.am.orig	2005-03-01 20:50:48.000000000 +0100
-+++ poppler-0.1.1/poppler/Makefile.am	2005-03-04 22:40:11.287696424 +0100
-@@ -46,7 +46,8 @@
- 	$(top_builddir)/goo/libgoo.la		\
+diff -Nur poppler-0.2.0.orig/poppler/Makefile.am poppler-0.2.0/poppler/Makefile.am
+--- poppler-0.2.0.orig/poppler/Makefile.am	2005-04-04 22:12:39.000000000 +0200
++++ poppler-0.2.0/poppler/Makefile.am	2005-04-06 12:00:12.000000000 +0200
+@@ -61,7 +61,8 @@
  	$(top_builddir)/fofi/libfofi.la		\
  	$(splash_libs)				\
--	$(cairo_libs)
-+	$(cairo_libs)				\
-+	$(FREETYPE_LIBS) -lfontconfig
+ 	$(cairo_libs)				\
+-	$(libjpeg_libs)
++	$(libjpeg_libs)				\
++ 	$(FREETYPE_LIBS) -lfontconfig
  
  poppler_includedir = $(includedir)/poppler
  poppler_include_HEADERS =	\
