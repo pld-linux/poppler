@@ -1,27 +1,27 @@
 #
 # Conditional build:
-%bcond_with	cairo	# enable Cairo backend
+%bcond_without	cairo	# disable Cairo backend
 #
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.1.1
+Version:	0.1.2
 Release:	0.1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	d10982c93a1ccee79a14bb277f94990a
+# Source0-md5:	d169c24c11eb74baaf3be6aa87cd3fbb
 Patch0:		%{name}-link.patch
 URL:		http://poppler.freedesktop.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-%{?with_cairo:BuildRequires:	cairo-devel >= 0.3.0}
+%{?with_cairo:BuildRequires:	cairo-devel >= 0.4.0}
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
-%{?with_cairo:Requires:	cairo >= 0.3.0}
+%{?with_cairo:Requires:	cairo >= 0.4.0}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
