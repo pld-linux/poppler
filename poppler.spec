@@ -10,8 +10,8 @@ URL:		http://poppler.freedesktop.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-A common PDF rendering library for integrating PDF viewing into desktop
-applications (based on the xpdf-3.0 code base).
+A common PDF rendering library for integrating PDF viewing into
+desktop applications (based on the xpdf-3.0 code base).
 
 %package devel
 Summary:	Poppler header files and development documentation
