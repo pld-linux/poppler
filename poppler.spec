@@ -1,4 +1,5 @@
 Summary:	PDF rendering library
+Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
 Version:	0.1.1
 Release:	0.1
@@ -13,27 +14,40 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 A common PDF rendering library for integrating PDF viewing into
 desktop applications (based on the xpdf-3.0 code base).
 
+%description -l pl
+Wspólna biblioteka renderuj±ca PDF do integrowania ogl±dania PDF w
+aplikacjach desktopowych (oparta na kodzie xpdf-3.0).
+
 %package devel
-Summary:	Poppler header files and development documentation
+Summary:	Poppler header files
+Summary(pl):	Pliki nag³ówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
-Header files and development documentation for the Poppler library.
+Header files for the Poppler library.
+
+%description devel -l pl
+Pliki nag³ówkowe biblioteki Poppler.
 
 %package static
 Summary:	Poppler static libraries
+Summary(pl):	Statyczne biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Poppler static libraries.
 
+%description static -l pl
+Statyczne biblioteki Poppler.
+
 %prep
 %setup -q
 
 %build
-%configure --disable-cairo-output
+%configure \
+	--disable-cairo-output
 %{__make}
 
 %install
@@ -45,8 +59,8 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post	-p	/sbin/ldconfig
-%postun	-p	/sbin/ldconfig
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
