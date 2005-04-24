@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	cairo	# disable Cairo backend
-%bcond_without	qt	# disable qt backend
+%bcond_without	qt	# disable qt wrapper
 #
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
