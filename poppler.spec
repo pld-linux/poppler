@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	cairo	# disable Cairo backend
+%bcond_without	qt	# disable qt backend
 #
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
@@ -23,7 +24,7 @@ BuildRequires:	gtk+2-devel >= 2.0.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
-BuildRequires:	qt-devel
+%{?with_qt:BuildRequires:	qt-devel}
 %{?with_cairo:Requires:	cairo >= 0.4.0}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -153,6 +154,7 @@ Statyczna wersja wrappera Qt dla popplera.
 %configure \
 	QTLIB=%{_libdir} \
 	%{!?with_cairo:--disable-cairo-output} \
+	%{!?with_qt:--disable-poppler-qt} \
 	--enable-a4-paper
 %{__make}
 
@@ -185,7 +187,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpoppler.la
 %{_includedir}/poppler
 %exclude %{_includedir}/poppler/glib
-%exclude %{_includedir}/poppler/poppler-qt.h
+%{?with_qt:%exclude %{_includedir}/poppler/poppler-qt.h}
 %{_pkgconfigdir}/poppler.pc
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
@@ -209,6 +211,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-glib.a
 
+%if %{with qt}
 %files qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt.so.*.*.*
@@ -223,3 +226,4 @@ rm -rf $RPM_BUILD_ROOT
 %files qt-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-qt.a
+%endif
