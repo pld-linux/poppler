@@ -3,20 +3,22 @@
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 #
+%define	cairo_ver	0.5.0
+#
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.3.1
+Version:	0.3.2
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	1d2843e84753f71491417ad70ee8d1da
+# Source0-md5:	e8570684a366cdf3d499070d9fe8588d
 Patch0:		%{name}-link.patch
 URL:		http://poppler.freedesktop.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-%{?with_cairo:BuildRequires:	cairo-devel >= 0.4.0}
+%{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gtk+2-devel >= 2.0.0
@@ -24,7 +26,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
 %{?with_qt:BuildRequires:	qt-devel}
-%{?with_cairo:Requires:	cairo >= 0.4.0}
+%{?with_cairo:Requires:	cairo >= %{cairo_ver}}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -40,7 +42,7 @@ Summary:	Poppler header files
 Summary(pl):	Pliki nag³ówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-%{?with_cairo:Requires:	cairo-devel >= 0.3.0}
+%{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
 Requires:	fontconfig-devel
 Requires:	freetype-devel >= 2.0
 Requires:	libstdc++-devel
