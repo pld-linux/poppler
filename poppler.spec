@@ -3,17 +3,17 @@
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 #
-%define	cairo_ver	0.5.0
+%define		cairo_ver	0.5.0
 #
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.3.3
+Version:	0.4.0
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	b3f30b1136931c2188059478894ab0f9
+# Source0-md5:	e7c7488788b8240ada090fa0406a3784
 Patch0:		%{name}-link.patch
 URL:		http://poppler.freedesktop.org/
 BuildRequires:	autoconf >= 2.59
