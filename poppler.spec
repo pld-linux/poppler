@@ -3,7 +3,7 @@
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 #
-%define		cairo_ver	0.5.0
+%define		cairo_ver	1.0.0
 #
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
