@@ -16,6 +16,7 @@ Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
 # Source0-md5:	beb1eea135a3c5b679a7a22d01a500c0
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
+Patch2:		%{name}-c++.patch
 URL:		http://poppler.freedesktop.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -146,6 +147,7 @@ Statyczna wersja wrappera Qt dla popplera.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__libtoolize}
