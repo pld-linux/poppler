@@ -8,12 +8,12 @@
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.4.3
+Version:	0.4.4
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	791dc78d8366eb05580183fe85174555
+# Source0-md5:	e081bca749a3373b2d95e696b7dddb9b
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
 URL:		http://poppler.freedesktop.org/
