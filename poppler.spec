@@ -8,12 +8,12 @@
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.4.4
+Version:	0.5.0
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	e081bca749a3373b2d95e696b7dddb9b
+# Source0-md5:	c84c1be19f43e4a84872ff08234c1960
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
 URL:		http://poppler.freedesktop.org/
@@ -23,6 +23,7 @@ BuildRequires:	automake
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	gtk-doc >= 1.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
@@ -142,6 +143,22 @@ Static version of Qt wrapper for poppler.
 %description qt-static -l pl
 Statyczna wersja wrappera Qt dla popplera.
 
+%package utils
+Summary:	Set of tools for viewing information and converting PDF files
+Summary(pl):	Zestaw narzêdzi do wy¶wietlania informacji i konwertowania plików PDF
+Group:		Applications/Publishing
+Requires:	%{name}-qt-devel = %{version}-%{release}
+Provides:	pdftops
+Obsoletes:	pdftohtml
+Obsoletes:	pdftohtml-pdftops
+Obsoletes:	xpdf-tools
+
+%description utils
+Set of tools for viewing information and converting PDF files.
+
+%description utils -l pl
+Zestaw narzêdzi do wy¶wietlania informacji i konwertowania plików PDF.
+
 %prep
 %setup -q
 %patch0 -p1
@@ -149,7 +166,7 @@ Statyczna wersja wrappera Qt dla popplera.
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
@@ -157,7 +174,9 @@ Statyczna wersja wrappera Qt dla popplera.
 	QTLIB=%{_libdir} \
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
-	--enable-a4-paper
+	--enable-a4-paper \
+	--enable-gtk-doc \
+	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
 %install
@@ -194,6 +213,8 @@ rm -rf $RPM_BUILD_ROOT
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
 
+%{_gtkdocdir}/poppler
+
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler.a
@@ -229,3 +250,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-qt.a
 %endif
+
+%files utils
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pdf*
+%{_mandir}/man1/pdf*
