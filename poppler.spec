@@ -143,12 +143,10 @@ Static version of Qt wrapper for poppler.
 %description qt-static -l pl
 Statyczna wersja wrappera Qt dla popplera.
 
-# some of utils are linked with qt! needs investigation
 %package utils
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl):	Zestaw narzêdzi do wy¶wietlania informacji i konwertowania plików PDF
 Group:		Applications/Publishing
-Requires:	%{name}-qt-devel = %{version}-%{release}
 Provides:	pdftops
 Obsoletes:	pdftohtml
 Obsoletes:	pdftohtml-pdftops
