@@ -143,7 +143,7 @@ Static version of Qt wrapper for poppler.
 %description qt-static -l pl
 Statyczna wersja wrappera Qt dla popplera.
 
-%package utils
+%package progs
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl):	Zestaw narzêdzi do wy¶wietlania informacji i konwertowania plików PDF
 Group:		Applications/Publishing
@@ -152,13 +152,13 @@ Obsoletes:	pdftohtml
 Obsoletes:	pdftohtml-pdftops
 Obsoletes:	xpdf-tools
 
-%description utils
+%description progs
 Package contains utilites for PDF files. These utilities allow to
 - extract information about PDF files
 - extract images from PDF files
 - convert PDF files to HTML, plain text and PS formats
 
-%description utils -l pl
+%description progs -l pl
 Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 - wy¶wietlanie informacji o plikach PDF
 - wydobywanie obrazków z plików PDF
@@ -257,7 +257,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpoppler-qt.a
 %endif
 
-%files utils
+%files progs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/pdf*
 %{_mandir}/man1/pdf*
