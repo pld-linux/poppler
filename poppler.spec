@@ -151,6 +151,7 @@ Provides:	pdftops
 Obsoletes:	pdftohtml
 Obsoletes:	pdftohtml-pdftops
 Obsoletes:	xpdf-tools
+Obsoletes:	poppler-utils
 
 %description progs
 Package contains utilites for PDF files. These utilities allow to
