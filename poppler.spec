@@ -153,10 +153,17 @@ Obsoletes:	pdftohtml-pdftops
 Obsoletes:	xpdf-tools
 
 %description utils
-Set of tools for viewing information and converting PDF files.
+Package contains utilites for PDF files. These utilities allow to
+- extract information about PDF files
+- extract images from PDF files
+- convert PDF files to HTML, plain text and PS formats
 
 %description utils -l pl
-Zestaw narzêdzi do wy¶wietlania informacji i konwertowania plików PDF.
+Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
+- wy¶wietlanie informacji o plikach PDF
+- wydobywanie obrazków z plików PDF
+- konwersjê plików PDF do formatów takich jak HTML, PS czy te¿ czystego
+  tekstu
 
 %prep
 %setup -q
