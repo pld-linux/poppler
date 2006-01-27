@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_without	apidocs # disable gtk-doc 
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 #
@@ -23,7 +24,7 @@ BuildRequires:	automake
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gtk+2-devel >= 2.0.0
-BuildRequires:	gtk-doc >= 1.0
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
@@ -182,7 +183,7 @@ Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
 	--enable-a4-paper \
-	--enable-gtk-doc \
+	%{?with_apidocs:--enable-gtk-doc} \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
