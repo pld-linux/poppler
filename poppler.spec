@@ -10,7 +10,7 @@ Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
 Version:	0.5.0
-Release:	1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
@@ -184,6 +184,7 @@ Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 	%{!?with_qt:--disable-poppler-qt} \
 	--enable-a4-paper \
 	%{?with_apidocs:--enable-gtk-doc} \
+	--enable-xpdf-headers \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
