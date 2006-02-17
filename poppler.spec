@@ -13,7 +13,7 @@ Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	e081bca749a3373b2d95e696b7dddb9b
+# Source0-md5:	2bb1c75aa3f9c42f0ba48b5492e6d32c
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
 URL:		http://poppler.freedesktop.org/
