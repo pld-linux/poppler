@@ -8,15 +8,14 @@
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.4.2
+Version:	0.4.5
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	beb1eea135a3c5b679a7a22d01a500c0
+# Source0-md5:	2bb1c75aa3f9c42f0ba48b5492e6d32c
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
-Patch2:		%{name}-c++.patch
 URL:		http://poppler.freedesktop.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -147,7 +146,6 @@ Statyczna wersja wrappera Qt dla popplera.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{__libtoolize}
