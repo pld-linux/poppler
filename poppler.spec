@@ -8,7 +8,7 @@
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.4.4
+Version:	0.4.5
 Release:	1
 License:	GPL
 Group:		Libraries
