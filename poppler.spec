@@ -31,6 +31,7 @@ BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
 %{?with_qt:BuildRequires:	qt-devel}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -187,6 +188,7 @@ Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 	--enable-a4-paper \
 	%{?with_apidocs:--enable-gtk-doc} \
 	--enable-xpdf-headers \
+	--enable-zlib \
 	--with-html-dir=%{_gtkdocdir}
 %{__make}
 
