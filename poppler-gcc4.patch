@@ -1,0 +1,25 @@
+--- poppler-0.5.1/qt4/src/poppler-qt4.h.orig	2006-01-23 15:43:39.000000000 +0100
++++ poppler-0.5.1/qt4/src/poppler-qt4.h	2006-03-01 17:19:44.145777250 +0100
+@@ -401,7 +401,7 @@
+ 	   \warning The application owns the pointer to Document, and this should
+ 	   be deleted when no longer required.
+ 	*/
+-	static Document *Document::load(const QString & filePath,
++	static Document*load(const QString & filePath,
+ 					const QByteArray &ownerPassword=QByteArray(),
+ 					const QByteArray &userPassword=QByteArray());
+   
+@@ -612,11 +612,11 @@
+ 	*/
+ 	bool hasEmbeddedFiles() const;
+ 
+-	Document::~Document();
++	~Document();
+   
+     private:
+ 	DocumentData *m_doc;
+-	Document::Document(DocumentData *dataA);
++	Document(DocumentData *dataA);
+     };
+ 
+     /**
