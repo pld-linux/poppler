@@ -3,6 +3,7 @@
 %bcond_without	apidocs # disable gtk-doc 
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
+%bcond_without	qt4	# disable qt4 wrapper
 #
 %define		cairo_ver	1.0.0
 #
@@ -10,14 +11,17 @@ Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
 Version:	0.5.1
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
 # Source0-md5:	a136cd731892f4570933034ba97c8704
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
+Patch2:		%{name}-qt_m4.patch
+Patch3:		%{name}-gcc4.patch
 URL:		http://poppler.freedesktop.org/
+%{?with_qt4:BuildRequires:	QtGui-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
@@ -172,17 +176,19 @@ Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
 %{__libtoolize}
 %{__aclocal} -I m4
-%{__autoconf}
+%{__autoconf} -f
 %{__autoheader}
 %{__automake}
 %configure \
-	QTLIB=%{_libdir} \
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
+	%{!?with_qt4:--disable-poppler-qt4} \
 	--enable-a4-paper \
 	%{?with_apidocs:--enable-gtk-doc} \
 	--enable-xpdf-headers \
