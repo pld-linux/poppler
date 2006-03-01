@@ -149,6 +149,44 @@ Static version of Qt wrapper for poppler.
 %description qt-static -l pl
 Statyczna wersja wrappera Qt dla popplera.
 
+%package Qt
+Summary:	Qt4 wrapper for poppler
+Summary(pl):	Wrapper Qt4 dla popplera
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description Qt
+Qt4 wrapper for poppler.
+
+%description Qt -l pl
+Wrapper Qt4 dla popplera.
+
+%package Qt-devel
+Summary:	Header files for Qt4 wrapper for poppler
+Summary(pl):	Pliki nag³ówkowe wrappera Qt4 dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-Qt = %{version}-%{release}
+Requires:	QtGui-devel
+
+%description Qt-devel
+Header files for Qt4 wrapper for poppler.
+
+%description Qt-devel -l pl
+Pliki nag³ówkowe wrapper Qt4 dla popplera.
+
+%package Qt-static
+Summary:	Static version of Qt4 wrapper for poppler
+Summary(pl):	Statyczna wersja wrappera Qt4 dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-Qt-devel = %{version}-%{release}
+
+%description Qt-static
+Static version of Qt4 wrapper for poppler.
+
+%description Qt-static -l pl
+Statyczna wersja wrappera Qt4 dla popplera.
+
 %package progs
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl):	Zestaw narzêdzi do wy¶wietlania informacji i konwertowania plików PDF
@@ -226,6 +264,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler
 %exclude %{_includedir}/poppler/glib
 %{?with_qt:%exclude %{_includedir}/poppler/poppler-qt.h}
+%{?with_qt4:%exclude %{_includedir}/poppler/poppler-qt4.h}
 %{_pkgconfigdir}/poppler.pc
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
@@ -266,6 +305,23 @@ rm -rf $RPM_BUILD_ROOT
 %files qt-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-qt.a
+%endif
+
+%if %{with qt4}
+%files Qt
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpoppler-qt4.so.*.*.*
+
+%files Qt-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpoppler-qt4.so
+%{_libdir}/libpoppler-qt4.la
+%{_includedir}/poppler/poppler-qt4.h
+%{_pkgconfigdir}/poppler-qt4.pc
+
+%files Qt-static
+%defattr(644,root,root,755)
+%{_libdir}/libpoppler-qt4.a
 %endif
 
 %files progs
