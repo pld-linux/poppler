@@ -252,6 +252,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	qt -p /sbin/ldconfig
 %postun	qt -p /sbin/ldconfig
 
+%post	Qt -p /sbin/ldconfig
+%postun	Qt -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
