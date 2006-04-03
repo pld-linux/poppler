@@ -1,9 +1,13 @@
-#
+# FIXME:
+# - qt4 causes main library to be linked with qt4 crap
+#   and this causes that kfile some.pdf crashes in qt4 code.
+#   qt4 disabled == kfile works nicely
+
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc 
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
-%bcond_without	qt4	# disable qt4 wrapper
+%bcond_with	qt4	# disable qt4 wrapper
 #
 %define		cairo_ver	1.0.0
 #
@@ -11,7 +15,7 @@ Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
 Version:	0.5.1
-Release:	1.1
+Release:	2
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
