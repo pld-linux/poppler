@@ -1,43 +1,40 @@
-# FIXME:
-# - qt4 causes main library to be linked with qt4 crap
-#   and this causes that kfile some.pdf crashes in qt4 code.
-#   qt4 disabled == kfile works nicely
-
+#
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc 
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
-%bcond_with	qt4	# disable qt4 wrapper
+%bcond_without	qt4	# disable qt4 wrapper
 #
 %define		cairo_ver	1.0.0
 #
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.5.1
-Release:	2
+Version:	0.5.2
+Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	a136cd731892f4570933034ba97c8704
+# Source0-md5:	e4e22cdec4a8b9d50be8a905089a4a25
+# missing file taken from CVS
+Source1:	%{name}-annotation-helper.h
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
 Patch2:		%{name}-qt_m4.patch
-Patch3:		%{name}-gcc4.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel}
+%{?with_qt4:BuildRequires:	QtXml-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
-BuildRequires:	gtk+2-devel >= 2.0.0
+BuildRequires:	gtk+2-devel >= 2:2.4.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
 %{?with_qt:BuildRequires:	qt-devel}
-%{?with_cairo:Requires:	cairo >= %{cairo_ver}}
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -54,7 +51,6 @@ Summary:	Poppler header files
 Summary(pl):	Pliki nag³ówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-%{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
 Requires:	fontconfig-devel
 Requires:	freetype-devel >= 2.0
 Requires:	libstdc++-devel
@@ -82,6 +78,8 @@ Summary:	GLib wrapper for poppler
 Summary(pl):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+%{?with_cairo:Requires:	cairo >= %{cairo_ver}}
+Requires:	gtk+2 >= 2:2.4.0
 
 %description glib
 GLib wrapper for poppler.
@@ -95,7 +93,8 @@ Summary(pl):	Pliki nag³ówkowe wrappera GLib dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
-Requires:	gtk+2-devel >= 2.0.0
+%{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
+Requires:	gtk+2-devel >= 2:2.4.0
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
@@ -172,6 +171,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-Qt = %{version}-%{release}
 Requires:	QtGui-devel
+Requires:	QtXml-devel
 
 %description Qt-devel
 Header files for Qt4 wrapper for poppler.
@@ -219,7 +219,10 @@ Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+
+# missing file - to be removed in next release
+[ -f qt4/src/poppler-annotation-helper.h ] && exit 1
+cp -f %{SOURCE1} qt4/src
 
 %build
 %{__libtoolize}
@@ -270,7 +273,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpoppler.la
 %{_includedir}/poppler
 %exclude %{_includedir}/poppler/glib
+# %{_includedir}/poppler/poppler-page-transition.h is shared between qt and qt4
 %{?with_qt:%exclude %{_includedir}/poppler/poppler-qt.h}
+%{?with_qt4:%exclude %{_includedir}/poppler/poppler-annotation.h}
+%{?with_qt4:%exclude %{_includedir}/poppler/poppler-link.h}
 %{?with_qt4:%exclude %{_includedir}/poppler/poppler-qt4.h}
 %{_pkgconfigdir}/poppler.pc
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
@@ -323,6 +329,8 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt4.so
 %{_libdir}/libpoppler-qt4.la
+%{_includedir}/poppler/poppler-annotation.h
+%{_includedir}/poppler/poppler-link.h
 %{_includedir}/poppler/poppler-qt4.h
 %{_pkgconfigdir}/poppler-qt4.pc
 
