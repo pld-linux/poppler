@@ -1,5 +1,5 @@
---- poppler-0.5.1/m4/qt.m4.orig	2006-01-23 15:43:36.000000000 +0100
-+++ poppler-0.5.1/m4/qt.m4	2006-03-01 14:34:41.000000000 +0100
+--- poppler-0.5.2/m4/qt.m4.orig	2006-05-02 06:03:46.000000000 +0200
++++ poppler-0.5.2/m4/qt.m4	2006-05-27 02:43:01.784504500 +0200
 @@ -7,8 +7,8 @@
  AC_DEFUN([POPPLER_FIND_QT],
  [
@@ -11,18 +11,18 @@
  if test -n "$QTDIR" ; then
      qt_incdirs="$QTDIR/include $qt_incdirs"
      qt_libdirs="$QTDIR/lib $qt_libdirs"
-@@ -73,8 +73,8 @@
+@@ -99,8 +99,8 @@
  [
  have_qt4=no
  dnl Search paths for Qt4 - not much real experience with this yet.
--qt4_incdirs="/usr/local/qt/include /usr/include/qt4 /usr/include/qt /usr/include /usr/X11R6/include/X11/qt /usr/X11R6/include/qt /usr/lib/qt/include"
--qt4_libdirs="/usr/local/qt/lib /usr/lib/qt /usr/lib /usr/X11R6/lib/X11/qt /usr/X11R6/lib/qt /usr/lib/qt/lib"
+-qt4_incdirs="/usr/local/qt/include /usr/include/qt4 /usr/include/qt /usr/include /usr/X11R6/include/X11/qt /usr/X11R6/include/qt /usr/lib/qt/include /usr/lib/qt4/include"
+-qt4_libdirs="/usr/local/qt/lib /usr/lib/qt /usr/lib /usr/X11R6/lib/X11/qt /usr/X11R6/lib/qt /usr/lib/qt/lib /usr/lib/qt4/lib"
 +qt4_incdirs="/usr/include/qt4"
 +qt4_libdirs="/usr/lib64 /usr/lib"
  
  if test -n "$QTDIR" ; then
      qt4_incdirs="$QTDIR/include $qt4_incdirs"
-@@ -153,8 +153,8 @@
+@@ -179,8 +179,8 @@
  [
  have_qt4testlib=no
  
