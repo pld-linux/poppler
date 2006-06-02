@@ -10,14 +10,12 @@
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.5.2
+Version:	0.5.3
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	e4e22cdec4a8b9d50be8a905089a4a25
-# missing file taken from CVS
-Source1:	%{name}-annotation-helper.h
+# Source0-md5:	d06207536555f5711e7bc61711c1b8a0
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype_includes.patch
 Patch2:		%{name}-qt_m4.patch
@@ -219,10 +217,6 @@ Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-
-# missing file - to be removed in next release
-[ -f qt4/src/poppler-annotation-helper.h ] && exit 1
-cp -f %{SOURCE1} qt4/src
 
 %build
 %{__libtoolize}
