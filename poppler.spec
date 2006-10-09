@@ -10,15 +10,14 @@
 Summary:	PDF rendering library
 Summary(pl):	Biblioteka renderuj±ca PDF
 Name:		poppler
-Version:	0.5.3
-Release:	2
+Version:	0.5.4
+Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	d06207536555f5711e7bc61711c1b8a0
-Patch0:		%{name}-link.patch
-Patch1:		%{name}-freetype_includes.patch
-Patch2:		%{name}-qt_m4.patch
+# Source0-md5:	053fdfd70533ecce1a06353fa945f061
+Patch0:		%{name}-freetype_includes.patch
+Patch1:		%{name}-qt_m4.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel}
 %{?with_qt4:BuildRequires:	QtXml-devel}
@@ -27,7 +26,7 @@ BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
-BuildRequires:	gtk+2-devel >= 2:2.4.0
+BuildRequires:	gtk+2-devel >= 2:2.8.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
@@ -77,7 +76,7 @@ Summary(pl):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
-Requires:	gtk+2 >= 2:2.4.0
+Requires:	gtk+2 >= 2:2.8.0
 
 %description glib
 GLib wrapper for poppler.
@@ -92,7 +91,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
-Requires:	gtk+2-devel >= 2:2.4.0
+Requires:	gtk+2-devel >= 2:2.8.0
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
@@ -216,7 +215,6 @@ Pakiet zawiera zestaw narzêdzi do plików PDF. Programy te umo¿liwiaj±
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
