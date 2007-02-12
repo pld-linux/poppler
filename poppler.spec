@@ -6,7 +6,7 @@
 %define		cairo_ver	1.0.0
 #
 Summary:	PDF rendering library
-Summary(pl):	Biblioteka renderuj眂a PDF
+Summary(pl.UTF-8):   Biblioteka renderuj膮ca PDF
 Name:		poppler
 Version:	0.4.4
 Release:	1
@@ -34,13 +34,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 A common PDF rendering library for integrating PDF viewing into
 desktop applications (based on the xpdf-3.0 code base).
 
-%description -l pl
-Wsp髄na biblioteka renderuj眂a PDF do integrowania ogl眃ania PDF w
+%description -l pl.UTF-8
+Wsp贸lna biblioteka renderuj膮ca PDF do integrowania ogl膮dania PDF w
 aplikacjach desktopowych (oparta na kodzie xpdf-3.0).
 
 %package devel
 Summary:	Poppler header files
-Summary(pl):	Pliki nag丑wkowe biblioteki Poppler
+Summary(pl.UTF-8):   Pliki nag艂贸wkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
@@ -51,36 +51,36 @@ Requires:	libstdc++-devel
 %description devel
 Header files for the Poppler library.
 
-%description devel -l pl
-Pliki nag丑wkowe biblioteki Poppler.
+%description devel -l pl.UTF-8
+Pliki nag艂贸wkowe biblioteki Poppler.
 
 %package static
 Summary:	Poppler static libraries
-Summary(pl):	Statyczne biblioteki Poppler
+Summary(pl.UTF-8):   Statyczne biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Poppler static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki Poppler.
 
 %package glib
 Summary:	GLib wrapper for poppler
-Summary(pl):	Wrapper GLib dla popplera
+Summary(pl.UTF-8):   Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description glib
 GLib wrapper for poppler.
 
-%description glib -l pl
+%description glib -l pl.UTF-8
 Wrapper GLib dla popplera.
 
 %package glib-devel
 Summary:	Header files for GLib wrapper for poppler
-Summary(pl):	Pliki nag丑wkowe wrappera GLib dla popplera
+Summary(pl.UTF-8):   Pliki nag艂贸wkowe wrappera GLib dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
@@ -89,36 +89,36 @@ Requires:	gtk+2-devel >= 2.0.0
 %description glib-devel
 Header files for GLib wrapper for poppler.
 
-%description glib-devel -l pl
-Pliki nag丑wkowe wrappera GLib dla popplera.
+%description glib-devel -l pl.UTF-8
+Pliki nag艂贸wkowe wrappera GLib dla popplera.
 
 %package glib-static
 Summary:	Static version of GLib wrapper for poppler
-Summary(pl):	Statyczna wersja wrappera GLib dla popplera
+Summary(pl.UTF-8):   Statyczna wersja wrappera GLib dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-glib-devel = %{version}-%{release}
 
 %description glib-static
 Static version of GLib wrapper for poppler.
 
-%description glib-static -l pl
+%description glib-static -l pl.UTF-8
 Statyczna wersja wrappera GLib dla popplera.
 
 %package qt
 Summary:	Qt wrapper for poppler
-Summary(pl):	Wrapper Qt dla popplera
+Summary(pl.UTF-8):   Wrapper Qt dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description qt
 Qt wrapper for poppler.
 
-%description qt -l pl
+%description qt -l pl.UTF-8
 Wrapper Qt dla popplera.
 
 %package qt-devel
 Summary:	Header files for Qt wrapper for poppler
-Summary(pl):	Pliki nag丑wkowe wrappera Qt dla popplera
+Summary(pl.UTF-8):   Pliki nag艂贸wkowe wrappera Qt dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-qt = %{version}-%{release}
@@ -127,19 +127,19 @@ Requires:	qt-devel
 %description qt-devel
 Header files for Qt wrapper for poppler.
 
-%description qt-devel -l pl
-Pliki nag丑wkowe wrappera Qt dla popplera.
+%description qt-devel -l pl.UTF-8
+Pliki nag艂贸wkowe wrappera Qt dla popplera.
 
 %package qt-static
 Summary:	Static version of Qt wrapper for poppler
-Summary(pl):	Statyczna wersja wrappera Qt dla popplera
+Summary(pl.UTF-8):   Statyczna wersja wrappera Qt dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-qt-devel = %{version}-%{release}
 
 %description qt-static
 Static version of Qt wrapper for poppler.
 
-%description qt-static -l pl
+%description qt-static -l pl.UTF-8
 Statyczna wersja wrappera Qt dla popplera.
 
 %prep
