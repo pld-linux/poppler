@@ -8,7 +8,7 @@
 %define		cairo_ver	1.0.0
 #
 Summary:	PDF rendering library
-Summary(pl):	Biblioteka renderuj±ca PDF
+Summary(pl.UTF-8):   Biblioteka renderujƒÖca PDF
 Name:		poppler
 Version:	0.5.4
 Release:	1
@@ -39,13 +39,13 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 A common PDF rendering library for integrating PDF viewing into
 desktop applications (based on the xpdf-3.0 code base).
 
-%description -l pl
-WspÛlna biblioteka renderuj±ca PDF do integrowania ogl±dania PDF w
+%description -l pl.UTF-8
+Wsp√≥lna biblioteka renderujƒÖca PDF do integrowania oglƒÖdania PDF w
 aplikacjach desktopowych (oparta na kodzie xpdf-3.0).
 
 %package devel
 Summary:	Poppler header files
-Summary(pl):	Pliki nag≥Ûwkowe biblioteki Poppler
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	fontconfig-devel
@@ -55,24 +55,24 @@ Requires:	libstdc++-devel
 %description devel
 Header files for the Poppler library.
 
-%description devel -l pl
-Pliki nag≥Ûwkowe biblioteki Poppler.
+%description devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe biblioteki Poppler.
 
 %package static
 Summary:	Poppler static libraries
-Summary(pl):	Statyczne biblioteki Poppler
+Summary(pl.UTF-8):   Statyczne biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Poppler static libraries.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczne biblioteki Poppler.
 
 %package glib
 Summary:	GLib wrapper for poppler
-Summary(pl):	Wrapper GLib dla popplera
+Summary(pl.UTF-8):   Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
@@ -81,12 +81,12 @@ Requires:	gtk+2 >= 2:2.8.0
 %description glib
 GLib wrapper for poppler.
 
-%description glib -l pl
+%description glib -l pl.UTF-8
 Wrapper GLib dla popplera.
 
 %package glib-devel
 Summary:	Header files for GLib wrapper for poppler
-Summary(pl):	Pliki nag≥Ûwkowe wrappera GLib dla popplera
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe wrappera GLib dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
@@ -96,36 +96,36 @@ Requires:	gtk+2-devel >= 2:2.8.0
 %description glib-devel
 Header files for GLib wrapper for poppler.
 
-%description glib-devel -l pl
-Pliki nag≥Ûwkowe wrappera GLib dla popplera.
+%description glib-devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe wrappera GLib dla popplera.
 
 %package glib-static
 Summary:	Static version of GLib wrapper for poppler
-Summary(pl):	Statyczna wersja wrappera GLib dla popplera
+Summary(pl.UTF-8):   Statyczna wersja wrappera GLib dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-glib-devel = %{version}-%{release}
 
 %description glib-static
 Static version of GLib wrapper for poppler.
 
-%description glib-static -l pl
+%description glib-static -l pl.UTF-8
 Statyczna wersja wrappera GLib dla popplera.
 
 %package qt
 Summary:	Qt wrapper for poppler
-Summary(pl):	Wrapper Qt dla popplera
+Summary(pl.UTF-8):   Wrapper Qt dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description qt
 Qt wrapper for poppler.
 
-%description qt -l pl
+%description qt -l pl.UTF-8
 Wrapper Qt dla popplera.
 
 %package qt-devel
 Summary:	Header files for Qt wrapper for poppler
-Summary(pl):	Pliki nag≥Ûwkowe wrappera Qt dla popplera
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe wrappera Qt dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-qt = %{version}-%{release}
@@ -134,36 +134,36 @@ Requires:	qt-devel
 %description qt-devel
 Header files for Qt wrapper for poppler.
 
-%description qt-devel -l pl
-Pliki nag≥Ûwkowe wrappera Qt dla popplera.
+%description qt-devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe wrappera Qt dla popplera.
 
 %package qt-static
 Summary:	Static version of Qt wrapper for poppler
-Summary(pl):	Statyczna wersja wrappera Qt dla popplera
+Summary(pl.UTF-8):   Statyczna wersja wrappera Qt dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-qt-devel = %{version}-%{release}
 
 %description qt-static
 Static version of Qt wrapper for poppler.
 
-%description qt-static -l pl
+%description qt-static -l pl.UTF-8
 Statyczna wersja wrappera Qt dla popplera.
 
 %package Qt
 Summary:	Qt4 wrapper for poppler
-Summary(pl):	Wrapper Qt4 dla popplera
+Summary(pl.UTF-8):   Wrapper Qt4 dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description Qt
 Qt4 wrapper for poppler.
 
-%description Qt -l pl
+%description Qt -l pl.UTF-8
 Wrapper Qt4 dla popplera.
 
 %package Qt-devel
 Summary:	Header files for Qt4 wrapper for poppler
-Summary(pl):	Pliki nag≥Ûwkowe wrappera Qt4 dla popplera
+Summary(pl.UTF-8):   Pliki nag≈Ç√≥wkowe wrappera Qt4 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-Qt = %{version}-%{release}
@@ -173,24 +173,24 @@ Requires:	QtXml-devel
 %description Qt-devel
 Header files for Qt4 wrapper for poppler.
 
-%description Qt-devel -l pl
-Pliki nag≥Ûwkowe wrapper Qt4 dla popplera.
+%description Qt-devel -l pl.UTF-8
+Pliki nag≈Ç√≥wkowe wrapper Qt4 dla popplera.
 
 %package Qt-static
 Summary:	Static version of Qt4 wrapper for poppler
-Summary(pl):	Statyczna wersja wrappera Qt4 dla popplera
+Summary(pl.UTF-8):   Statyczna wersja wrappera Qt4 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-Qt-devel = %{version}-%{release}
 
 %description Qt-static
 Static version of Qt4 wrapper for poppler.
 
-%description Qt-static -l pl
+%description Qt-static -l pl.UTF-8
 Statyczna wersja wrappera Qt4 dla popplera.
 
 %package progs
 Summary:	Set of tools for viewing information and converting PDF files
-Summary(pl):	Zestaw narzÍdzi do wy∂wietlania informacji i konwertowania plikÛw PDF
+Summary(pl.UTF-8):   Zestaw narzƒôdzi do wy≈õwietlania informacji i konwertowania plik√≥w PDF
 Group:		Applications/Publishing
 Provides:	pdftops
 Obsoletes:	pdftohtml
@@ -204,11 +204,11 @@ Package contains utilites for PDF files. These utilities allow to
 - extract images from PDF files
 - convert PDF files to HTML, plain text and PS formats
 
-%description progs -l pl
-Pakiet zawiera zestaw narzÍdzi do plikÛw PDF. Programy te umoøliwiaj±
-- wy∂wietlanie informacji o plikach PDF
-- wydobywanie obrazkÛw z plikÛw PDF
-- konwersjÍ plikÛw PDF do formatÛw takich jak HTML, PS czy teø czystego
+%description progs -l pl.UTF-8
+Pakiet zawiera zestaw narzƒôdzi do plik√≥w PDF. Programy te umo≈ºliwiajƒÖ
+- wy≈õwietlanie informacji o plikach PDF
+- wydobywanie obrazk√≥w z plik√≥w PDF
+- konwersjƒô plik√≥w PDF do format√≥w takich jak HTML, PS czy te≈º czystego
   tekstu
 
 %prep
