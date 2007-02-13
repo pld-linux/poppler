@@ -8,7 +8,7 @@
 %define		cairo_ver	1.0.0
 #
 Summary:	PDF rendering library
-Summary(pl.UTF-8):   Biblioteka renderująca PDF
+Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.5.4
 Release:	1
@@ -45,7 +45,7 @@ aplikacjach desktopowych (oparta na kodzie xpdf-3.0).
 
 %package devel
 Summary:	Poppler header files
-Summary(pl.UTF-8):   Pliki nagłówkowe biblioteki Poppler
+Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	fontconfig-devel
@@ -60,7 +60,7 @@ Pliki nagłówkowe biblioteki Poppler.
 
 %package static
 Summary:	Poppler static libraries
-Summary(pl.UTF-8):   Statyczne biblioteki Poppler
+Summary(pl.UTF-8):	Statyczne biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -72,7 +72,7 @@ Statyczne biblioteki Poppler.
 
 %package glib
 Summary:	GLib wrapper for poppler
-Summary(pl.UTF-8):   Wrapper GLib dla popplera
+Summary(pl.UTF-8):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
@@ -86,7 +86,7 @@ Wrapper GLib dla popplera.
 
 %package glib-devel
 Summary:	Header files for GLib wrapper for poppler
-Summary(pl.UTF-8):   Pliki nagłówkowe wrappera GLib dla popplera
+Summary(pl.UTF-8):	Pliki nagłówkowe wrappera GLib dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
@@ -101,7 +101,7 @@ Pliki nagłówkowe wrappera GLib dla popplera.
 
 %package glib-static
 Summary:	Static version of GLib wrapper for poppler
-Summary(pl.UTF-8):   Statyczna wersja wrappera GLib dla popplera
+Summary(pl.UTF-8):	Statyczna wersja wrappera GLib dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-glib-devel = %{version}-%{release}
 
@@ -113,7 +113,7 @@ Statyczna wersja wrappera GLib dla popplera.
 
 %package qt
 Summary:	Qt wrapper for poppler
-Summary(pl.UTF-8):   Wrapper Qt dla popplera
+Summary(pl.UTF-8):	Wrapper Qt dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -125,7 +125,7 @@ Wrapper Qt dla popplera.
 
 %package qt-devel
 Summary:	Header files for Qt wrapper for poppler
-Summary(pl.UTF-8):   Pliki nagłówkowe wrappera Qt dla popplera
+Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-qt = %{version}-%{release}
@@ -139,7 +139,7 @@ Pliki nagłówkowe wrappera Qt dla popplera.
 
 %package qt-static
 Summary:	Static version of Qt wrapper for poppler
-Summary(pl.UTF-8):   Statyczna wersja wrappera Qt dla popplera
+Summary(pl.UTF-8):	Statyczna wersja wrappera Qt dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-qt-devel = %{version}-%{release}
 
@@ -151,7 +151,7 @@ Statyczna wersja wrappera Qt dla popplera.
 
 %package Qt
 Summary:	Qt4 wrapper for poppler
-Summary(pl.UTF-8):   Wrapper Qt4 dla popplera
+Summary(pl.UTF-8):	Wrapper Qt4 dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -163,7 +163,7 @@ Wrapper Qt4 dla popplera.
 
 %package Qt-devel
 Summary:	Header files for Qt4 wrapper for poppler
-Summary(pl.UTF-8):   Pliki nagłówkowe wrappera Qt4 dla popplera
+Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt4 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-Qt = %{version}-%{release}
@@ -178,7 +178,7 @@ Pliki nagłówkowe wrapper Qt4 dla popplera.
 
 %package Qt-static
 Summary:	Static version of Qt4 wrapper for poppler
-Summary(pl.UTF-8):   Statyczna wersja wrappera Qt4 dla popplera
+Summary(pl.UTF-8):	Statyczna wersja wrappera Qt4 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-Qt-devel = %{version}-%{release}
 
@@ -190,7 +190,7 @@ Statyczna wersja wrappera Qt4 dla popplera.
 
 %package progs
 Summary:	Set of tools for viewing information and converting PDF files
-Summary(pl.UTF-8):   Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
+Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
 Group:		Applications/Publishing
 Provides:	pdftops
 Obsoletes:	pdftohtml
