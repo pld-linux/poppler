@@ -10,17 +10,17 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.5.4
+Version:	0.5.9
 Release:	1
 License:	GPL
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	053fdfd70533ecce1a06353fa945f061
-Patch0:		%{name}-freetype_includes.patch
-Patch1:		%{name}-qt_m4.patch
+# Source0-md5:	8d1ac008614c0e413bcac95b8102fa07
+Patch0:		%{name}-qt_m4.patch
 URL:		http://poppler.freedesktop.org/
-%{?with_qt4:BuildRequires:	QtGui-devel}
-%{?with_qt4:BuildRequires:	QtXml-devel}
+%{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
+%{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
+%{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
@@ -28,10 +28,12 @@ BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gtk+2-devel >= 2:2.8.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
+BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	pkgconfig
-%{?with_qt:BuildRequires:	qt-devel}
+%{?with_qt:BuildRequires:	qt-devel >= 3.0}
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -214,7 +216,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
@@ -264,13 +265,13 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler.so
 %{_libdir}/libpoppler.la
-%{_includedir}/poppler
+%dir %{_includedir}/poppler
+%{_includedir}/poppler/poppler-config.h
+%{_includedir}/poppler/[ABCDEFGJLNOPSTUX]*.h
+%{_includedir}/poppler/Function.cc
+%{_includedir}/poppler/goo
+%{_includedir}/poppler/splash
 %exclude %{_includedir}/poppler/glib
-# %{_includedir}/poppler/poppler-page-transition.h is shared between qt and qt4
-%{?with_qt:%exclude %{_includedir}/poppler/poppler-qt.h}
-%{?with_qt4:%exclude %{_includedir}/poppler/poppler-annotation.h}
-%{?with_qt4:%exclude %{_includedir}/poppler/poppler-link.h}
-%{?with_qt4:%exclude %{_includedir}/poppler/poppler-qt4.h}
 %{_pkgconfigdir}/poppler.pc
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
@@ -305,7 +306,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt.so
 %{_libdir}/libpoppler-qt.la
-%{_includedir}/poppler/poppler-qt.h
+%{_includedir}/poppler/qt3
 %{_pkgconfigdir}/poppler-qt.pc
 
 %files qt-static
@@ -322,9 +323,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt4.so
 %{_libdir}/libpoppler-qt4.la
-%{_includedir}/poppler/poppler-annotation.h
-%{_includedir}/poppler/poppler-link.h
-%{_includedir}/poppler/poppler-qt4.h
+%{_includedir}/poppler/qt4
 %{_pkgconfigdir}/poppler-qt4.pc
 
 %files Qt-static
