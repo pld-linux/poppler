@@ -5,17 +5,17 @@
 %bcond_without	qt	# disable qt wrapper
 %bcond_without	qt4	# disable qt4 wrapper
 #
-%define		cairo_ver	1.0.0
+%define		cairo_ver	1.4.0
 #
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.5.9
+Version:	0.5.91
 Release:	1
-License:	GPL
+License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	8d1ac008614c0e413bcac95b8102fa07
+# Source0-md5:	0cc1b0f183b1559f10154bb57268c6e1
 Patch0:		%{name}-qt_m4.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
