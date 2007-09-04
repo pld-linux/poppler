@@ -215,7 +215,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 
 %prep
 %setup -q
-#%patch0 -p1
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
@@ -225,6 +224,8 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %{__autoheader}
 %{__automake}
 %configure \
+	QTINC=/usr/include/qt \
+	QTLIB=%{_libdir} \
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
 	%{!?with_qt4:--disable-poppler-qt4} \
