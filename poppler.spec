@@ -16,7 +16,6 @@ License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
 # Source0-md5:	96883867572aa1e55e979ec75369c562
-Patch0:		%{name}-qt_m4.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
