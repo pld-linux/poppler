@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc 
-%bcond_without	cairo	# disable Cairo backend
+%bcond_with	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 %bcond_with	qt4	# disable qt4 wrapper
 #
