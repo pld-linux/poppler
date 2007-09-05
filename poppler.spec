@@ -3,9 +3,9 @@
 %bcond_without	apidocs # disable gtk-doc 
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
-%bcond_without	qt4	# disable qt4 wrapper
+%bcond_with	qt4	# disable qt4 wrapper
 #
-%define		cairo_ver	1.4.0
+%define		cairo_ver	1.2.6
 #
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
@@ -225,6 +225,8 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %{__autoheader}
 %{__automake}
 %configure \
+	QTINC=/usr/include/qt \
+	QTLIB=%{_libdir} \
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
 	%{!?with_qt4:--disable-poppler-qt4} \
