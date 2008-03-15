@@ -10,12 +10,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.6.4
+Version:	0.7.2
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	13d12ca4e349574cfbbcf4a9b2b3ae52
+# Source0-md5:	766e7f9b866a87971717c54b529e081c
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
@@ -260,7 +260,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.2
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.3
 
 %files devel
 %defattr(644,root,root,755)
@@ -268,7 +268,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpoppler.la
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
-%{_includedir}/poppler/[ABCDEFGJLNOPSTUX]*.h
+%{_includedir}/poppler/[ABCDEFGJLMNOPSTUX]*.h
 %{_includedir}/poppler/Function.cc
 %{_includedir}/poppler/goo
 %{_includedir}/poppler/splash
@@ -286,7 +286,7 @@ rm -rf $RPM_BUILD_ROOT
 %files glib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.2
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.3
 
 %files glib-devel
 %defattr(644,root,root,755)
@@ -303,7 +303,7 @@ rm -rf $RPM_BUILD_ROOT
 %files qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.2
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.3
 
 %files qt-devel
 %defattr(644,root,root,755)
@@ -321,7 +321,7 @@ rm -rf $RPM_BUILD_ROOT
 %files Qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt4.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt4.so.2
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt4.so.3
 
 %files Qt-devel
 %defattr(644,root,root,755)
