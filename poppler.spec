@@ -306,7 +306,7 @@ rm -rf $RPM_BUILD_ROOT
 %files qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.3
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.2
 
 %files qt-devel
 %defattr(644,root,root,755)
