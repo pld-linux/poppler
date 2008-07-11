@@ -10,13 +10,13 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.8.3
+Version:	0.8.4
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	d5631bdbde9dda89ff20796005ece4d4
-Patch0:		%{name}-qt4.patch
+# Source0-md5:	29d341f295d01bff64c63a29a6abb274
+Patch0:		%{name}-secfix.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
