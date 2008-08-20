@@ -10,13 +10,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.8.5
+Version:	0.8.6
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	00593d56340b4a635f4a34590c445800
-Patch0:		%{name}-secfix.patch
+# Source0-md5:	6f2f5761ea06074d581951014b646372
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
@@ -72,6 +71,18 @@ Poppler static libraries.
 
 %description static -l pl.UTF-8
 Statyczne biblioteki Poppler.
+
+%package apidocs
+Summary:	Poppler library API documentation
+Summary(pl.UTF-8):	Dokumentacja API biblioteki Poppler
+Group:		Documentation
+Requires:	gtk-doc-common
+
+%description apidocs
+Poppler library API documentation.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki Poppler.
 
 %package glib
 Summary:	GLib wrapper for poppler
@@ -216,7 +227,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
@@ -280,11 +290,15 @@ rm -rf $RPM_BUILD_ROOT
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
 
-%{_gtkdocdir}/poppler
-
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler.a
+
+%if %{with apidocs}
+%files apidocs
+%defattr(644,root,root,755)
+%{_gtkdocdir}/poppler
+%endif
 
 %files glib
 %defattr(644,root,root,755)
