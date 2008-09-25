@@ -18,9 +18,8 @@ Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
 # Source0-md5:	9af81429d6f8639c357a5eed25583365
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
-%{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
-%{?with_qt4:BuildRequires:	qt4-build}
+%{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
@@ -30,10 +29,11 @@ BuildRequires:	gtk+2-devel >= 2:2.8.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
-BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libtool >= 2:1.5
+BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	pkgconfig
 %{?with_qt:BuildRequires:	qt-devel >= 3.0}
+%{?with_qt4:BuildRequires:	qt4-build}
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -179,8 +179,8 @@ Wrapper Qt4 dla popplera.
 Summary:	Header files for Qt4 wrapper for poppler
 Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt4 dla popplera
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-Qt = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
 Requires:	QtGui-devel
 Requires:	QtXml-devel
 
@@ -209,8 +209,8 @@ Group:		Applications/Publishing
 Provides:	pdftops
 Obsoletes:	pdftohtml
 Obsoletes:	pdftohtml-pdftops
-Obsoletes:	xpdf-tools
 Obsoletes:	poppler-utils
+Obsoletes:	xpdf-tools
 
 %description progs
 Package contains utilites for PDF files. These utilities allow to
@@ -246,6 +246,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	--enable-xpdf-headers \
 	--enable-zlib \
 	--with-html-dir=%{_gtkdocdir}
+
 %{__make}
 
 %install
@@ -253,6 +254,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+%if %{without apidocs}
+# why it still installs them, brr
+rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
