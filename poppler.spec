@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without	apidocs # disable gtk-doc 
+%bcond_without	apidocs # disable gtk-doc
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 %bcond_without	qt4	# disable qt4 wrapper
@@ -10,12 +10,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.8.7
-Release:	3
+Version:	0.10.2
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	9af81429d6f8639c357a5eed25583365
+# Source0-md5:	a802a178d12f453f1d0176d67f923c7d
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
@@ -245,6 +245,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	%{?with_apidocs:--enable-gtk-doc} \
 	--enable-xpdf-headers \
 	--enable-zlib \
+	--enable-dependency-tracking \
 	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
@@ -279,7 +280,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.3
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.4
 
 %files devel
 %defattr(644,root,root,755)
@@ -309,7 +310,7 @@ rm -rf $RPM_BUILD_ROOT
 %files glib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.3
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.4
 
 %files glib-devel
 %defattr(644,root,root,755)
@@ -344,7 +345,7 @@ rm -rf $RPM_BUILD_ROOT
 %files Qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt4.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt4.so.3
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt4.so.4
 
 %files Qt-devel
 %defattr(644,root,root,755)
