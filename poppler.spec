@@ -10,12 +10,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.10.4
+Version:	0.10.5
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	8d17dbf4e4f0f55bdcf433ce1d5c44b5
+# Source0-md5:	125f671a19707861132fb03e73b61184
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
@@ -219,11 +219,12 @@ Package contains utilites for PDF files. These utilities allow to
 - convert PDF files to HTML, plain text and PS formats
 
 %description progs -l pl.UTF-8
-Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
+Pakiet zawiera zestaw narzędzi do plików PDF. Programy te
+umożliwiają
 - wyświetlanie informacji o plikach PDF
 - wydobywanie obrazków z plików PDF
-- konwersję plików PDF do formatów takich jak HTML, PS czy też czystego
-  tekstu
+- konwersję plików PDF do formatów takich jak HTML, PS czy też
+  czystego tekstu
 
 %prep
 %setup -q
@@ -236,7 +237,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %{__autoheader}
 %{__automake}
 %configure \
-	QTINC=/usr/include/qt \
+	QTINC=%{_includedir}/qt \
 	QTLIB=%{_libdir} \
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
