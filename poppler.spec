@@ -219,8 +219,7 @@ Package contains utilites for PDF files. These utilities allow to
 - convert PDF files to HTML, plain text and PS formats
 
 %description progs -l pl.UTF-8
-Pakiet zawiera zestaw narzędzi do plików PDF. Programy te
-umożliwiają
+Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 - wyświetlanie informacji o plikach PDF
 - wydobywanie obrazków z plików PDF
 - konwersję plików PDF do formatów takich jak HTML, PS czy też
