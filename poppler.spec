@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	apidocs # disable gtk-doc
+%bcond_without	apidocs # disable gtk-doc
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 %bcond_without	qt4	# disable qt4 wrapper
@@ -10,12 +10,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.11.1
+Version:	0.11.2
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	2c6aadf4c3c2d21da71239fa924db77d
+# Source0-md5:	40dde7c6ff7ae4fe61752fdcef077e52
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
