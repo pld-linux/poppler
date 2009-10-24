@@ -26,7 +26,6 @@ BuildRequires:	automake
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gdk-pixbuf-devel
-BuildRequires:	gtk+2-devel >= 2:2.8.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
