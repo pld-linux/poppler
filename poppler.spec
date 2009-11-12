@@ -238,6 +238,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %configure \
 	QTINC=%{_includedir}/qt \
 	QTLIB=%{_libdir} \
+	--disable-gtk-test \
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
 	%{!?with_qt4:--disable-poppler-qt4} \
