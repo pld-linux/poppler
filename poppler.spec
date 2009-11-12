@@ -11,7 +11,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.12.1
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
@@ -25,7 +25,7 @@ BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
-BuildRequires:	gtk+2-devel >= 2:2.8.0
+BuildRequires:	glib2-devel >= 1:2.6.0
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
@@ -90,7 +90,7 @@ Summary(pl.UTF-8):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
-Requires:	gtk+2 >= 2:2.8.0
+Requires:	glib2 >= 1:2.6.0
 
 %description glib
 GLib wrapper for poppler.
@@ -105,7 +105,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
-Requires:	gtk+2-devel >= 2:2.8.0
+Requires:	glib2-devel >= 1:2.6.0
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
