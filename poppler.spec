@@ -23,6 +23,7 @@ URL:		http://poppler.freedesktop.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	glib2-devel >= 1:2.6.0
