@@ -35,7 +35,6 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	pkgconfig
 %{?with_qt:BuildRequires:	qt-devel >= 3.0}
 %{?with_qt4:BuildRequires:	qt4-build}
-%{?with_apidocs:BuildRequires:	source-highlight}
 BuildRequires:	which
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
