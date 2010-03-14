@@ -11,7 +11,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.12.4
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
@@ -32,6 +32,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig
 %{?with_qt:BuildRequires:	qt-devel >= 3.0}
 %{?with_qt4:BuildRequires:	qt4-build}
@@ -55,6 +56,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	fontconfig-devel
 Requires:	freetype-devel >= 2.0
 Requires:	libstdc++-devel
+Requires:	openjpeg-devel
 
 %description devel
 Header files for the Poppler library.
