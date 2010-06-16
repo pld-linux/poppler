@@ -1,6 +1,4 @@
 #
-# TODO: unpackaged files
-#
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
 %bcond_without	cairo	# disable Cairo backend
