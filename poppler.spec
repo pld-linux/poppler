@@ -7,6 +7,7 @@
 %bcond_without	qt	# disable qt wrapper
 %bcond_without	qt4	# disable qt4 wrapper
 %bcond_without	cpp	# disable cpp wrapper
+%bcond_without	glib	# disable glib wrapper
 #
 %define		cairo_ver	1.4.0
 #
@@ -287,6 +288,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	%{!?with_qt:--disable-poppler-qt} \
 	%{!?with_qt4:--disable-poppler-qt4} \
 	%{!?with_cpp:--disable-poppler-cpp} \
+	%{!?with_glib:--disable-poppler-glib} \
 	--enable-a4-paper \
 	%{?with_apidocs:--enable-gtk-doc} \
 	--enable-xpdf-headers \
@@ -353,6 +355,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_gtkdocdir}/poppler
 %endif
 
+%if %{with cpp}
 %files cpp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-cpp.so.*.*.*
@@ -368,7 +371,9 @@ rm -rf $RPM_BUILD_ROOT
 %files cpp-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-cpp.a
+%endif
 
+%if %{with glib}
 %files glib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
@@ -384,6 +389,7 @@ rm -rf $RPM_BUILD_ROOT
 %files glib-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-glib.a
+%endif
 
 %if %{with qt}
 %files qt
