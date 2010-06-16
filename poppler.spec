@@ -6,6 +6,7 @@
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
 %bcond_without	qt4	# disable qt4 wrapper
+%bcond_without	cpp	# disable cpp wrapper
 #
 %define		cairo_ver	1.4.0
 #
@@ -13,7 +14,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.14.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
@@ -89,6 +90,43 @@ Poppler library API documentation.
 
 %description apidocs -l pl.UTF-8
 Dokumentacja API biblioteki Poppler.
+
+%package cpp
+Summary:	Cpp wrapper for poppler
+Summary(pl.UTF-8):	Wrapper cpp dla popplera
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description cpp
+Cpp wrapper for poppler.
+
+%description cpp -l pl.UTF-8
+Wrapper cpp dla popplera.
+
+%package cpp-devel
+Summary:	Header files for cpp wrapper for poppler
+Summary(pl.UTF-8):	Pliki nagłówkowe wrappera cpp dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-cpp = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description cpp-devel
+Header files for cpp wrapper for poppler.
+
+%description cpp-devel -l pl.UTF-8
+Pliki nagłówkowe wrappera cpp dla popplera.
+
+%package cpp-static
+Summary:	Static version of cpp wrapper for poppler
+Summary(pl.UTF-8):	Statyczna wersja wrappera cpp dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-cpp-devel = %{version}-%{release}
+
+%description cpp-static
+Static version of cpp wrapper for poppler.
+
+%description cpp-static -l pl.UTF-8
+Statyczna wersja wrappera cpp dla popplera.
 
 %package glib
 Summary:	GLib wrapper for poppler
@@ -248,6 +286,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	%{!?with_cairo:--disable-cairo-output} \
 	%{!?with_qt:--disable-poppler-qt} \
 	%{!?with_qt4:--disable-poppler-qt4} \
+	%{!?with_cpp:--disable-poppler-cpp} \
 	--enable-a4-paper \
 	%{?with_apidocs:--enable-gtk-doc} \
 	--enable-xpdf-headers \
@@ -313,6 +352,22 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_gtkdocdir}/poppler
 %endif
+
+%files cpp
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpoppler-cpp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-cpp.so.0
+
+%files cpp-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpoppler-cpp.so
+%{_libdir}/libpoppler-cpp.la
+%{_includedir}/poppler/cpp
+%{_pkgconfigdir}/poppler-cpp.pc
+
+%files cpp-static
+%defattr(644,root,root,755)
+%{_libdir}/libpoppler-cpp.a
 
 %files glib
 %defattr(644,root,root,755)
