@@ -334,7 +334,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpoppler.la
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
-%{_includedir}/poppler/[ABCDEFGJLMNOPSTUX]*.h
+%{_includedir}/poppler/[ABCDEFGJLMNOPRSTUX]*.h
 %{_includedir}/poppler/goo
 %{_includedir}/poppler/fofi
 %{_includedir}/poppler/splash
