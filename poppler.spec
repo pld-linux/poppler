@@ -12,12 +12,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.14.3
+Version:	0.14.4
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	1024c608a8a7c1d6ec301bddf11f3af9
+# Source0-md5:	a40fe96e1115f648ce4689e667743530
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
@@ -39,6 +39,7 @@ BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig
 %{?with_qt:BuildRequires:	qt-devel >= 3.0}
 %{?with_qt4:BuildRequires:	qt4-build}
+BuildRequires:	sed >= 4.0
 BuildRequires:	which
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -271,6 +272,9 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 
 %prep
 %setup -q
+
+# fix link with Qt4 libraries
+%{__sed} -i 's,(POPPLER_QT_LIBS),(POPPLER_QT4_LIBS) -lqt-mt,' qt/Makefile.am
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
