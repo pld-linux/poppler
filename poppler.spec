@@ -7,7 +7,7 @@
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
 #
-%define		cairo_ver	1.4.0
+%define		cairo_ver	1.8.4
 #
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
@@ -19,18 +19,19 @@ Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
 # Source0-md5:	a40fe96e1115f648ce4689e667743530
 URL:		http://poppler.freedesktop.org/
-%{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
-%{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
-%{?with_qt4:BuildRequires:	QtXml-devel >= 4.1.0}
+%{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
+%{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
+%{?with_qt4:BuildRequires:	QtXml-devel >= 4.4.0}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	fontconfig-devel
+BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gettext-devel
-%{?with_glib:BuildRequires:	glib2-devel >= 1:2.6.0}}
+%{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
+BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
@@ -57,8 +58,9 @@ Summary:	Poppler header files
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	fontconfig-devel
+Requires:	fontconfig-devel >= 2.0.0
 Requires:	freetype-devel >= 2.0
+Requires:	lcms-devel
 Requires:	libstdc++-devel
 Requires:	openjpeg-devel
 
@@ -135,7 +137,7 @@ Summary(pl.UTF-8):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
-Requires:	glib2 >= 1:2.6.0
+Requires:	glib2 >= 1:2.18.0
 
 %description glib
 GLib wrapper for poppler.
@@ -150,7 +152,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
-Requires:	glib2-devel >= 1:2.6.0
+Requires:	glib2-devel >= 1:2.18.0
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
@@ -213,6 +215,8 @@ Summary:	Qt4 wrapper for poppler
 Summary(pl.UTF-8):	Wrapper Qt4 dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	QtGui >= 4.4.0
+Requires:	QtXml >= 4.4.0
 
 %description Qt
 Qt4 wrapper for poppler.
@@ -226,8 +230,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt4 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-Qt = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
-Requires:	QtGui-devel
-Requires:	QtXml-devel
+Requires:	QtGui-devel >= 4.4.0
+Requires:	QtXml-devel >= 4.4.0
 
 %description Qt-devel
 Header files for Qt4 wrapper for poppler.
@@ -273,8 +277,8 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %prep
 %setup -q
 
-# fix link with Qt4 libraries
-%{__sed} -i 's,(POPPLER_QT_LIBS),(POPPLER_QT4_LIBS) -lqt-mt,' qt/Makefile.am
+# fix link with Qt 3 libraries
+%{__sed} -i 's,(POPPLER_QT_LIBS),(libqt3_LIBS),' qt/Makefile.am
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
@@ -292,6 +296,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	%{!?with_qt4:--disable-poppler-qt4} \
 	%{!?with_cpp:--disable-poppler-cpp} \
 	%{!?with_glib:--disable-poppler-glib} \
+	--disable-silent-rules \
 	--enable-a4-paper \
 	%{?with_apidocs:--enable-gtk-doc} \
 	--enable-xpdf-headers \
@@ -318,6 +323,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	-p /sbin/ldconfig
 %postun	-p /sbin/ldconfig
 
+%post	cpp -p /sbin/ldconfig
+%postun	cpp -p /sbin/ldconfig
+
 %post	glib -p /sbin/ldconfig
 %postun	glib -p /sbin/ldconfig
 
@@ -340,8 +348,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
 %{_includedir}/poppler/[ABCDEFGJLMNOPRSTUX]*.h
-%{_includedir}/poppler/goo
 %{_includedir}/poppler/fofi
+%{_includedir}/poppler/goo
 %{_includedir}/poppler/splash
 %exclude %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler.pc
