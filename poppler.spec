@@ -12,13 +12,13 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.15.1
+Version:	0.15.2
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
+# Source0-md5:	47ca7d4226cbad71507e73578219694a
 Patch0:		%{name}-link.patch
-# Source0-md5:	e198d5b4d2b1f0f75a81451b79b1e57e
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.1.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.1.0}
@@ -307,7 +307,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{without apidocs}
 # why it still installs them, brr
-rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
+%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
 %endif
 
 %clean
@@ -329,7 +329,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.9
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.10
 
 %files devel
 %defattr(644,root,root,755)
