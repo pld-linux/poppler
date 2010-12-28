@@ -12,13 +12,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-# keep stable line: 0.14 at this moment, 0.15 is development version
-Version:	0.14.5
+Version:	0.16.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	f60038f22284876f021f29f1b1a0fe1c
+# Source0-md5:	654f8e8debf028085173d76e3c34b652
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
@@ -30,7 +29,7 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gettext-devel
-%{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
+%{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}}
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
@@ -315,7 +314,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{without apidocs}
 # why it still installs them, brr
-rm -rf $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
+%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
 %endif
 
 %clean
@@ -340,7 +339,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.7
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.12
 
 %files devel
 %defattr(644,root,root,755)
@@ -389,7 +388,7 @@ rm -rf $RPM_BUILD_ROOT
 %files glib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.5
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.6
 
 %files glib-devel
 %defattr(644,root,root,755)
@@ -407,7 +406,7 @@ rm -rf $RPM_BUILD_ROOT
 %files qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.2
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.3
 
 %files qt-devel
 %defattr(644,root,root,755)
