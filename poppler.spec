@@ -29,7 +29,7 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gettext-devel
-%{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}}
+%{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
