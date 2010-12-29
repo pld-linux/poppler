@@ -7,7 +7,7 @@
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
 #
-%define		cairo_ver	1.8.4
+%define		cairo_ver	1.10.0
 #
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
@@ -30,14 +30,15 @@ BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gettext-devel
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
-%{?with_apidocs:BuildRequires:	gtk-doc >= 1.0}
+BuildRequires:	gobject-introspection-devel >= 0.6.7
+%{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openjpeg-devel
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.18
 %{?with_qt:BuildRequires:	qt-devel >= 3.0}
 %{?with_qt4:BuildRequires:	qt4-build}
 BuildRequires:	sed >= 4.0
@@ -340,6 +341,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpoppler.so.12
+%{_libdir}/girepository-1.0/Poppler-0.16.typelib
 
 %files devel
 %defattr(644,root,root,755)
@@ -347,11 +349,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpoppler.la
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
-%{_includedir}/poppler/[ABCDEFGJLMNOPRSTUX]*.h
+%{_includedir}/poppler/[ABCDEFGHJLMNOPRSTUX]*.h
 %{_includedir}/poppler/fofi
 %{_includedir}/poppler/goo
 %{_includedir}/poppler/splash
-%exclude %{_includedir}/poppler/glib
+%{_datadir}/gir-1.0/Poppler-0.16.gir
 %{_pkgconfigdir}/poppler.pc
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
