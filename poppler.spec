@@ -315,7 +315,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{without apidocs}
 # why it still installs them, brr
-%{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
+%{__rm} -rf $RPM_BUILD_ROOT%{_gtkdocdir}/poppler || :
 %endif
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
