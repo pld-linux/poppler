@@ -13,7 +13,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.16.3
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
@@ -318,6 +318,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} -r $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
 %endif
 
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -346,7 +348,6 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler.so
-%{_libdir}/libpoppler.la
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
 %{_includedir}/poppler/[ABCDEFGHJLMNOPRSTUX]*.h
@@ -377,7 +378,6 @@ rm -rf $RPM_BUILD_ROOT
 %files cpp-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-cpp.so
-%{_libdir}/libpoppler-cpp.la
 %{_includedir}/poppler/cpp
 %{_pkgconfigdir}/poppler-cpp.pc
 
@@ -395,7 +395,6 @@ rm -rf $RPM_BUILD_ROOT
 %files glib-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so
-%{_libdir}/libpoppler-glib.la
 %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler-glib.pc
 
@@ -413,7 +412,6 @@ rm -rf $RPM_BUILD_ROOT
 %files qt-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt.so
-%{_libdir}/libpoppler-qt.la
 %{_includedir}/poppler/qt3
 %{_pkgconfigdir}/poppler-qt.pc
 
@@ -431,7 +429,6 @@ rm -rf $RPM_BUILD_ROOT
 %files Qt-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt4.so
-%{_libdir}/libpoppler-qt4.la
 %{_includedir}/poppler/qt4
 %{_pkgconfigdir}/poppler-qt4.pc
 
