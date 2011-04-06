@@ -343,7 +343,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpoppler.so.13
-%{_libdir}/girepository-1.0/Poppler-0.16.typelib
 
 %files devel
 %defattr(644,root,root,755)
@@ -354,7 +353,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler/fofi
 %{_includedir}/poppler/goo
 %{_includedir}/poppler/splash
-%{_datadir}/gir-1.0/Poppler-0.16.gir
 %{_pkgconfigdir}/poppler.pc
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
@@ -391,12 +389,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.6
+%{_libdir}/girepository-1.0/Poppler-0.16.typelib
 
 %files glib-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so
 %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler-glib.pc
+%{_datadir}/gir-1.0/Poppler-0.16.gir
 
 %files glib-static
 %defattr(644,root,root,755)
