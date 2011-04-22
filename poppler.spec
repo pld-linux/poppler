@@ -3,7 +3,6 @@
 %bcond_without	apidocs # disable gtk-doc
 %bcond_without	cairo	# disable Cairo backend
 %bcond_without	qt	# disable qt wrapper
-%bcond_without	qt4	# disable qt4 wrapper
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
 #
@@ -12,16 +11,16 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.16.4
+Version:	0.17.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	2b996ca77dad04b422f67238daab48e7
+# Source0-md5:	e72d37bd392572574afbb95ba1931312
 URL:		http://poppler.freedesktop.org/
-%{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtXml-devel >= 4.4.0}
+%{?with_qt:BuildRequires:	QtGui-devel >= 4.4.0}
+%{?with_qt:BuildRequires:	QtTest-devel >= 4.4.0}
+%{?with_qt:BuildRequires:	QtXml-devel >= 4.4.0}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
@@ -39,9 +38,7 @@ BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig >= 1:0.18
-%{?with_qt:BuildRequires:	qt-devel >= 3.0}
-%{?with_qt4:BuildRequires:	qt4-build}
-BuildRequires:	sed >= 4.0
+%{?with_qt:BuildRequires:	qt4-build}
 BuildRequires:	which
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -278,9 +275,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %prep
 %setup -q
 
-# fix link with Qt 3 libraries
-%{__sed} -i 's,(POPPLER_QT_LIBS),(libqt3_LIBS),' qt/Makefile.am
-
 %build
 %{?with_apidocs:%{__gtkdocize}}
 %{__libtoolize}
@@ -293,8 +287,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	QTLIB=%{_libdir} \
 	--disable-gtk-test \
 	%{!?with_cairo:--disable-cairo-output} \
-	%{!?with_qt:--disable-poppler-qt} \
-	%{!?with_qt4:--disable-poppler-qt4} \
+	%{!?with_qt:--disable-poppler-qt4} \
 	%{!?with_cpp:--disable-poppler-cpp} \
 	%{!?with_glib:--disable-poppler-glib} \
 	--disable-silent-rules \
@@ -342,14 +335,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.13
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.14
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler.so
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
-%{_includedir}/poppler/[ABCDEFGHJLMNOPRSTUX]*.h
+%{_includedir}/poppler/[ABCDEFGHJLMNOPRSTUVX]*.h
 %{_includedir}/poppler/fofi
 %{_includedir}/poppler/goo
 %{_includedir}/poppler/splash
@@ -388,7 +381,7 @@ rm -rf $RPM_BUILD_ROOT
 %files glib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.6
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.8
 %{_libdir}/girepository-1.0/Poppler-0.16.typelib
 
 %files glib-devel
@@ -404,23 +397,6 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %if %{with qt}
-%files qt
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.3
-
-%files qt-devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt.so
-%{_includedir}/poppler/qt3
-%{_pkgconfigdir}/poppler-qt.pc
-
-%files qt-static
-%defattr(644,root,root,755)
-%{_libdir}/libpoppler-qt.a
-%endif
-
-%if %{with qt4}
 %files Qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt4.so.*.*.*
