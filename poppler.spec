@@ -13,7 +13,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.16.5
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
@@ -25,6 +25,7 @@ URL:		http://poppler.freedesktop.org/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
+BuildRequires:	curl-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
@@ -264,16 +265,16 @@ Obsoletes:	xpdf-tools
 
 %description progs
 Package contains utilites for PDF files. These utilities allow to
-- extract information about PDF files
-- extract images from PDF files
-- convert PDF files to HTML, plain text and PS formats
+- extract information about PDF files,
+- extract images from PDF files,
+- convert PDF files to HTML, plain text and PS formats.
 
 %description progs -l pl.UTF-8
 Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
-- wyświetlanie informacji o plikach PDF
-- wydobywanie obrazków z plików PDF
+- wyświetlanie informacji o plikach PDF,
+- wydobywanie obrazków z plików PDF,
 - konwersję plików PDF do formatów takich jak HTML, PS czy też
-  czystego tekstu
+  czystego tekstu.
 
 %prep
 %setup -q
@@ -292,13 +293,14 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	QTINC=%{_includedir}/qt \
 	QTLIB=%{_libdir} \
 	--disable-gtk-test \
+	--enable-libcurl \
+	%{?with_apidocs:--enable-gtk-doc} \
 	%{!?with_cairo:--disable-cairo-output} \
-	%{!?with_qt:--disable-poppler-qt} \
-	%{!?with_qt4:--disable-poppler-qt4} \
 	%{!?with_cpp:--disable-poppler-cpp} \
 	%{!?with_glib:--disable-poppler-glib} \
+	%{!?with_qt:--disable-poppler-qt} \
+	%{!?with_qt4:--disable-poppler-qt4} \
 	--disable-silent-rules \
-	%{?with_apidocs:--enable-gtk-doc} \
 	--enable-xpdf-headers \
 	--enable-zlib \
 	--enable-dependency-tracking \
