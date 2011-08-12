@@ -1,3 +1,6 @@
+# TODO
+# - qt and Qt packages make file collisions on case insensitive filesystems,
+#   consider adding version suffix to either of the pckages
 #
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
