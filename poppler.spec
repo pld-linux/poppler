@@ -1,3 +1,4 @@
+#%# $Revision: 1.131.2.4 $, $Date: 2011-09-16 10:21:03 $
 #
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
@@ -11,12 +12,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.17.3
+Version:	0.17.4
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	ccdedfdbfa507ebaca5c2e23d87fcbee
+# Source0-md5:	8cbdb1c2780ae70b9bec042c9f703c47
 URL:		http://poppler.freedesktop.org/
 %{?with_qt:BuildRequires:	QtGui-devel >= 4.4.0}
 %{?with_qt:BuildRequires:	QtTest-devel >= 4.4.0}
@@ -382,14 +383,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.8
-%{_libdir}/girepository-1.0/Poppler-0.16.typelib
+%{_libdir}/girepository-1.0/Poppler-0.18.typelib
 
 %files glib-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so
 %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler-glib.pc
-%{_datadir}/gir-1.0/Poppler-0.16.gir
+%{_datadir}/gir-1.0/Poppler-0.18.gir
 
 %files glib-static
 %defattr(644,root,root,755)
