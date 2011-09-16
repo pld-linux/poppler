@@ -1,4 +1,3 @@
-#%# $Revision: 1.131.2.4 $, $Date: 2011-09-16 10:21:03 $
 #
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
