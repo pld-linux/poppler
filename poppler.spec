@@ -9,6 +9,7 @@
 %bcond_without	qt4	# disable qt4 wrapper
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
+%bcond_without	gdk	# disable gdk support in glib wrapper
 #
 %define		cairo_ver	1.10.0
 #
@@ -16,7 +17,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.16.7
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
@@ -36,6 +37,7 @@ BuildRequires:	gettext-devel
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
 BuildRequires:	gobject-introspection-devel >= 0.6.7
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
+%{?with_gdk:BuildRequires:	gtk+2-devel}
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
@@ -158,6 +160,7 @@ Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
 Requires:	glib2-devel >= 1:2.18.0
+%{?with_gdk:Provides:	poppler-glib-devel(gdk)}
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
