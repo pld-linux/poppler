@@ -302,6 +302,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	--enable-libcurl \
 	%{?with_apidocs:--enable-gtk-doc} \
 	%{!?with_cairo:--disable-cairo-output} \
+	%{!?with_gdk:--disable-gdk} \
 	%{!?with_cpp:--disable-poppler-cpp} \
 	%{!?with_glib:--disable-poppler-glib} \
 	%{!?with_qt:--disable-poppler-qt} \
