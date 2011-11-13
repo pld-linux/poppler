@@ -1,6 +1,3 @@
-# TODO
-# - qt and Qt packages make file collisions on case insensitive filesystems,
-#   consider adding version suffix to either of the pckages
 #
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
@@ -8,7 +5,6 @@
 %bcond_without	qt4	# disable qt4 wrapper
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
-%bcond_without	gdk	# disable gdk support in glib wrapper
 #
 %define		cairo_ver	1.10.0
 #
@@ -36,10 +32,11 @@ BuildRequires:	gettext-devel
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
 BuildRequires:	gobject-introspection-devel >= 0.6.7
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
-%{?with_gdk:BuildRequires:	gtk+2-devel}
 BuildRequires:	lcms-devel
 BuildRequires:	libjpeg-devel
+BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
+BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openjpeg-devel
@@ -63,11 +60,16 @@ Summary:	Poppler header files
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	curl-devel
 Requires:	fontconfig-devel >= 2.0.0
 Requires:	freetype-devel >= 2.0
 Requires:	lcms-devel
+Requires:	libjpeg-devel
+Requires:	libpng-devel
 Requires:	libstdc++-devel
+Requires:	libtiff-devel
 Requires:	openjpeg-devel
+Requires:	zlib-devel
 
 %description devel
 Header files for the Poppler library.
@@ -158,7 +160,6 @@ Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
 Requires:	glib2-devel >= 1:2.18.0
-%{?with_gdk:Provides:	poppler-glib-devel(gdk)}
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
@@ -185,6 +186,7 @@ Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	QtGui >= 4.4.0
 Requires:	QtXml >= 4.4.0
+Obsoletes:	poppler-qt
 
 %description Qt
 Qt4 wrapper for poppler.
@@ -200,6 +202,7 @@ Requires:	%{name}-Qt = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	QtGui-devel >= 4.4.0
 Requires:	QtXml-devel >= 4.4.0
+Obsoletes:	poppler-qt-devel
 
 %description Qt-devel
 Header files for Qt4 wrapper for poppler.
@@ -212,6 +215,7 @@ Summary:	Static version of Qt4 wrapper for poppler
 Summary(pl.UTF-8):	Statyczna wersja wrappera Qt4 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-Qt-devel = %{version}-%{release}
+Obsoletes:	poppler-qt-static
 
 %description Qt-static
 Static version of Qt4 wrapper for poppler.
@@ -257,7 +261,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	--enable-libcurl \
 	%{?with_apidocs:--enable-gtk-doc} \
 	%{!?with_cairo:--disable-cairo-output} \
-	%{!?with_gdk:--disable-gdk} \
 	%{!?with_cpp:--disable-poppler-cpp} \
 	%{!?with_glib:--disable-poppler-glib} \
 	%{!?with_qt4:--disable-poppler-qt4} \
