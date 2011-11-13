@@ -5,7 +5,6 @@
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
 %bcond_without	cairo	# disable Cairo backend
-%bcond_without	qt	# disable qt wrapper
 %bcond_without	qt4	# disable qt4 wrapper
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
@@ -16,12 +15,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.16.7
-Release:	2
+Version:	0.18.1
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	3afa28e3c8c4f06b0fbca3c91e06394e
+# Source0-md5:	d30e883a27423c936ef338ce1d967e2d
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
@@ -45,7 +44,6 @@ BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	openjpeg-devel
 BuildRequires:	pkgconfig >= 1:0.18
-%{?with_qt:BuildRequires:	qt-devel >= 3.0}
 %{?with_qt4:BuildRequires:	qt4-build}
 BuildRequires:	sed >= 4.0
 BuildRequires:	which
@@ -180,44 +178,6 @@ Static version of GLib wrapper for poppler.
 %description glib-static -l pl.UTF-8
 Statyczna wersja wrappera GLib dla popplera.
 
-%package qt
-Summary:	Qt wrapper for poppler
-Summary(pl.UTF-8):	Wrapper Qt dla popplera
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-
-%description qt
-Qt wrapper for poppler.
-
-%description qt -l pl.UTF-8
-Wrapper Qt dla popplera.
-
-%package qt-devel
-Summary:	Header files for Qt wrapper for poppler
-Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt dla popplera
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	%{name}-qt = %{version}-%{release}
-Requires:	qt-devel
-
-%description qt-devel
-Header files for Qt wrapper for poppler.
-
-%description qt-devel -l pl.UTF-8
-Pliki nagłówkowe wrappera Qt dla popplera.
-
-%package qt-static
-Summary:	Static version of Qt wrapper for poppler
-Summary(pl.UTF-8):	Statyczna wersja wrappera Qt dla popplera
-Group:		Development/Libraries
-Requires:	%{name}-qt-devel = %{version}-%{release}
-
-%description qt-static
-Static version of Qt wrapper for poppler.
-
-%description qt-static -l pl.UTF-8
-Statyczna wersja wrappera Qt dla popplera.
-
 %package Qt
 Summary:	Qt4 wrapper for poppler
 Summary(pl.UTF-8):	Wrapper Qt4 dla popplera
@@ -285,9 +245,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %prep
 %setup -q
 
-# fix link with Qt 3 libraries
-%{__sed} -i 's,(POPPLER_QT_LIBS),(libqt3_LIBS),' qt/Makefile.am
-
 %build
 %{?with_apidocs:%{__gtkdocize}}
 %{__libtoolize}
@@ -296,8 +253,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %{__autoheader}
 %{__automake}
 %configure \
-	QTINC=%{_includedir}/qt \
-	QTLIB=%{_libdir} \
 	--disable-gtk-test \
 	--enable-libcurl \
 	%{?with_apidocs:--enable-gtk-doc} \
@@ -305,7 +260,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	%{!?with_gdk:--disable-gdk} \
 	%{!?with_cpp:--disable-poppler-cpp} \
 	%{!?with_glib:--disable-poppler-glib} \
-	%{!?with_qt:--disable-poppler-qt} \
 	%{!?with_qt4:--disable-poppler-qt4} \
 	--disable-silent-rules \
 	--enable-xpdf-headers \
@@ -340,9 +294,6 @@ rm -rf $RPM_BUILD_ROOT
 %post	glib -p /sbin/ldconfig
 %postun	glib -p /sbin/ldconfig
 
-%post	qt -p /sbin/ldconfig
-%postun	qt -p /sbin/ldconfig
-
 %post	Qt -p /sbin/ldconfig
 %postun	Qt -p /sbin/ldconfig
 
@@ -350,14 +301,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.13
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.19
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler.so
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
-%{_includedir}/poppler/[ABCDEFGHJLMNOPRSTUX]*.h
+%{_includedir}/poppler/[ABCDEFGHJLMNOPRSTUVX]*.h
 %{_includedir}/poppler/fofi
 %{_includedir}/poppler/goo
 %{_includedir}/poppler/splash
@@ -396,36 +347,19 @@ rm -rf $RPM_BUILD_ROOT
 %files glib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.6
-%{_libdir}/girepository-1.0/Poppler-0.16.typelib
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.8
+%{_libdir}/girepository-1.0/Poppler-0.18.typelib
 
 %files glib-devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so
 %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler-glib.pc
-%{_datadir}/gir-1.0/Poppler-0.16.gir
+%{_datadir}/gir-1.0/Poppler-0.18.gir
 
 %files glib-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-glib.a
-%endif
-
-%if %{with qt}
-%files qt
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt.so.3
-
-%files qt-devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt.so
-%{_includedir}/poppler/qt3
-%{_pkgconfigdir}/poppler-qt.pc
-
-%files qt-static
-%defattr(644,root,root,755)
-%{_libdir}/libpoppler-qt.a
 %endif
 
 %if %{with qt4}
