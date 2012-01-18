@@ -11,12 +11,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.18.2
-Release:	3
+Version:	0.18.3
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	38616927823ef01937aab26872e957e4
+# Source0-md5:	d70d2d63d8acd29c97185f7e5f09c9b4
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
@@ -268,7 +268,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 	--enable-xpdf-headers \
 	--enable-zlib \
 	--enable-dependency-tracking \
-	--with-html-dir=%{_gtkdocdir} 
+	--with-html-dir=%{_gtkdocdir}
 
 %{__make}
 
