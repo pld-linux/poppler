@@ -11,12 +11,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.18.4
-Release:	2
+Version:	0.20.0
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	12658f3308597e57f3faff538cc73baf
+# Source0-md5:	5bca54b9561bf5b14d9344efce2cd4f3
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
@@ -32,7 +32,7 @@ BuildRequires:	gettext-devel
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
 BuildRequires:	gobject-introspection-devel >= 0.6.7
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
-BuildRequires:	lcms-devel
+BuildRequires:	lcms2-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -63,7 +63,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	curl-devel
 Requires:	fontconfig-devel >= 2.0.0
 Requires:	freetype-devel >= 2.0
-Requires:	lcms-devel
+Requires:	lcms2-devel
 Requires:	libjpeg-devel
 Requires:	libpng-devel
 Requires:	libstdc++-devel
@@ -305,7 +305,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.19
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.25
 
 %files devel
 %defattr(644,root,root,755)
@@ -370,7 +370,7 @@ rm -rf $RPM_BUILD_ROOT
 %files Qt
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt4.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt4.so.3
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt4.so.4
 
 %files Qt-devel
 %defattr(644,root,root,755)
