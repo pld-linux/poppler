@@ -11,12 +11,13 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.20.4
+Version:	0.22.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	ce9486ab05254af922650be64c943487
+# Source0-md5:	c7038be37a7d446544e83a7df3c26196
+Patch0:		%{name}-am.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
@@ -39,12 +40,17 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
-BuildRequires:	openjpeg-devel
+BuildRequires:	openjpeg-devel >= 1.5
 BuildRequires:	pkgconfig >= 1:0.18
+# wanted cairo backends
+BuildRequires:	pkgconfig(cairo-pdf) >= %{cairo_ver}
+BuildRequires:	pkgconfig(cairo-ps) >= %{cairo_ver}
+BuildRequires:	pkgconfig(cairo-svg) >= %{cairo_ver}
 %{?with_qt4:BuildRequires:	qt4-build}
 BuildRequires:	sed >= 4.0
 BuildRequires:	which
 BuildRequires:	zlib-devel
+Requires:	openjpeg >= 1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -68,7 +74,7 @@ Requires:	libjpeg-devel
 Requires:	libpng-devel
 Requires:	libstdc++-devel
 Requires:	libtiff-devel
-Requires:	openjpeg-devel
+Requires:	openjpeg-devel >= 1.5
 Requires:	zlib-devel
 
 %description devel
@@ -248,6 +254,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
@@ -305,7 +312,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.28
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.34
 
 %files devel
 %defattr(644,root,root,755)
