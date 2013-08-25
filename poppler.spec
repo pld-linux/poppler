@@ -1,3 +1,4 @@
+# TODO: qt5 port (BR: Qt5Core, Qt5Gui, Qt5Xml, Qt5Widgets, Qt5Test >= 5.0.0)
 #
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
@@ -11,12 +12,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.22.5
+Version:	0.24.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.gz
-# Source0-md5:	1cd27460f7e3379d1eb109cfd7bcdb39
+Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.xz
+# Source0-md5:	891000481f639e996d000d767d953a7f
 URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
@@ -48,6 +49,8 @@ BuildRequires:	pkgconfig(cairo-svg) >= %{cairo_ver}
 %{?with_qt4:BuildRequires:	qt4-build}
 BuildRequires:	sed >= 4.0
 BuildRequires:	which
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	openjpeg >= 1.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -310,7 +313,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.37
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.43
 
 %files devel
 %defattr(644,root,root,755)
