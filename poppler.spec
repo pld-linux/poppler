@@ -6,29 +6,28 @@
 %bcond_without	qt5	# disable qt5 wrapper
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
-#
+
 %define		cairo_ver	1.10.0
-#
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	0.24.4
-Release:	2
+Release:	3
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.xz
 # Source0-md5:	2da22b966cf7a2f8da5bf021e68188ce
 Patch0:		%{name}-qt5.patch
 URL:		http://poppler.freedesktop.org/
-%{?with_qt4:BuildRequires:	QtCore-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtXml-devel >= 4.4.0}
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Test-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Widgets-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Xml-devel >= 5.0.0}
+%{?with_qt4:BuildRequires:	QtCore-devel >= 4.4.0}
+%{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
+%{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
+%{?with_qt4:BuildRequires:	QtXml-devel >= 4.4.0}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
@@ -56,8 +55,8 @@ BuildRequires:	pkgconfig(cairo-svg) >= %{cairo_ver}
 %{?with_qt4:BuildRequires:	qt4-build >= 4.4.0}
 %{?with_qt5:BuildRequires:	qt5-build >= 5.0.0}
 BuildRequires:	sed >= 4.0
-BuildRequires:	which
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	which
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	openjpeg >= 1.5
@@ -110,6 +109,9 @@ Summary:	Poppler library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki Poppler
 Group:		Documentation
 Requires:	gtk-doc-common
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 Poppler library API documentation.
@@ -217,8 +219,8 @@ Wrapper Qt4 dla popplera.
 Summary:	Header files for Qt4 wrapper for poppler
 Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt4 dla popplera
 Group:		Development/Libraries
-Requires:	%{name}-qt4 = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-qt4 = %{version}-%{release}
 Requires:	QtCore-devel >= 4.4.0
 Requires:	QtGui-devel >= 4.4.0
 Requires:	QtXml-devel >= 4.4.0
@@ -263,8 +265,8 @@ Wrapper Qt5 dla popplera.
 Summary:	Header files for Qt5 wrapper for poppler
 Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt5 dla popplera
 Group:		Development/Libraries
-Requires:	%{name}-qt5 = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-qt5 = %{version}-%{release}
 Requires:	Qt5Core-devel >= 5.0.0
 Requires:	Qt5Gui-devel >= 5.0.0
 Requires:	Qt5Widgets-devel >= 5.0.0
