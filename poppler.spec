@@ -11,12 +11,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.26.2
+Version:	0.26.3
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	10dcb979a57c0cbaa72d2d04c6adc32c
+# Source0-md5:	e101f6653f9f68ab63dac63ec34801d1
 Patch0:		%{name}-qt5.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= 5.0.0}
@@ -24,10 +24,10 @@ URL:		http://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Test-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Widgets-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Xml-devel >= 5.0.0}
-%{?with_qt4:BuildRequires:	QtCore-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtGui-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtTest-devel >= 4.4.0}
-%{?with_qt4:BuildRequires:	QtXml-devel >= 4.4.0}
+%{?with_qt4:BuildRequires:	QtCore-devel >= 4.7.0}
+%{?with_qt4:BuildRequires:	QtGui-devel >= 4.7.0}
+%{?with_qt4:BuildRequires:	QtTest-devel >= 4.7.0}
+%{?with_qt4:BuildRequires:	QtXml-devel >= 4.7.0}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}

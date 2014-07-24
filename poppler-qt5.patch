@@ -1,6 +1,6 @@
---- poppler-0.24.4/configure.ac.orig	2013-11-27 00:11:26.000000000 +0100
-+++ poppler-0.24.4/configure.ac	2014-02-25 20:57:38.944540843 +0100
-@@ -661,20 +661,20 @@
+--- poppler-0.26.3/configure.ac.orig	2014-07-24 23:17:58.522789036 +0200
++++ poppler-0.26.3/configure.ac	2014-07-24 23:22:51.026124439 +0200
+@@ -649,20 +649,20 @@
    AC_CHECK_TOOL(MOCQT5, moc)
    AC_MSG_CHECKING([for Qt5 moc])
    mocversion=`$MOCQT5 -v 2>&1`
@@ -12,8 +12,8 @@
      AC_CHECK_TOOL(MOCQT52, moc-qt5)
      AC_MSG_CHECKING([for Qt5 moc-qt5])
      mocversion=`$MOCQT52 -v 2>&1`
--    mocversiongrep=`echo $mocversion | grep "Qt 5\|moc 5"`
-+    mocversiongrep=`echo $mocversion | grep -E "Qt 5|moc 5| 5\.[[0-9]]"`
+-    mocversiongrep=`echo $mocversion | grep "Qt 5\|moc-qt5 5\|moc 5"`
++    mocversiongrep=`echo $mocversion | grep -E "Qt 5\|moc-qt5 5|moc 5| 5\.[[0-9]]"`
      if test x"$mocversiongrep" != x"$mocversion"; then
        AC_CHECK_TOOL(QTCHOOSER, qtchooser)
        AC_MSG_CHECKING([for qtchooser])
