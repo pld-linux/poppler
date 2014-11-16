@@ -11,12 +11,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.26.5
+Version:	0.28.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	786c943eee550e3a977c181e7778b1c8
+# Source0-md5:	28de4b9f698296e11dff45a5cce1aa93
 Patch0:		%{name}-qt5.patch
 URL:		http://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= 5.0.0}
@@ -29,7 +29,7 @@ URL:		http://poppler.freedesktop.org/
 %{?with_qt4:BuildRequires:	QtTest-devel >= 4.7.0}
 %{?with_qt4:BuildRequires:	QtXml-devel >= 4.7.0}
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.7
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
 BuildRequires:	curl-devel
 BuildRequires:	docbook-dtd412-xml
@@ -39,7 +39,7 @@ BuildRequires:	gettext-devel
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
 BuildRequires:	gobject-introspection-devel >= 0.6.7
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
-BuildRequires:	lcms2-devel
+BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
@@ -78,7 +78,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	curl-devel
 Requires:	fontconfig-devel >= 2.0.0
 Requires:	freetype-devel >= 2.0
-Requires:	lcms2-devel
+Requires:	lcms2-devel >= 2
 Requires:	libjpeg-devel
 Requires:	libpng-devel
 Requires:	libstdc++-devel
@@ -378,7 +378,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.46
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.47
 
 %files devel
 %defattr(644,root,root,755)
