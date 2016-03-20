@@ -11,14 +11,14 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.38.0
+Version:	0.42.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
-Source0:	http://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	850f0725e5b263c504f0cb0910d1fadc
+Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
+# Source0-md5:	c63efcde7d52b4135bb7463b04790862
 Patch0:		%{name}-qt5.patch
-URL:		http://poppler.freedesktop.org/
+URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Test-devel >= 5.0.0}
@@ -46,6 +46,8 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	nss-devel >= 3
+# or openjpeg2-devel >= 2 with --enable-libopenjpeg=openjpeg2
 BuildRequires:	openjpeg-devel >= 1.5
 BuildRequires:	pkgconfig >= 1:0.18
 # wanted cairo backends
@@ -76,15 +78,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	curl-devel
-Requires:	fontconfig-devel >= 2.0.0
-Requires:	freetype-devel >= 2.0
 Requires:	lcms2-devel >= 2
-Requires:	libjpeg-devel
-Requires:	libpng-devel
 Requires:	libstdc++-devel
-Requires:	libtiff-devel
-Requires:	openjpeg-devel >= 1.5
-Requires:	zlib-devel
+Requires:	nss-devel >= 3
 
 %description devel
 Header files for the Poppler library.
@@ -378,7 +374,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.57
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.59
 
 %files devel
 %defattr(644,root,root,755)
