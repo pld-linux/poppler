@@ -11,13 +11,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.43.0
+Version:	0.46.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	1d2b001663119855cdfbc0713dbfb9c6
-Patch0:		%{name}-qt5.patch
+# Source0-md5:	a6513d6fe72751c58b501403c3da6ef1
 URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= 5.0.0}
@@ -311,7 +310,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{?with_apidocs:%{__gtkdocize}}
@@ -321,8 +319,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %{__autoheader}
 %{__automake}
 %configure \
-	MOCQT4=/usr/bin/moc-qt4 \
-	MOCQT5=/usr/bin/moc-qt5 \
 	--disable-gtk-test \
 	--enable-libcurl \
 	%{?with_apidocs:--enable-gtk-doc} \
@@ -347,7 +343,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %if %{without apidocs}
 # why it still installs them, brr
-%{__rm} -rf $RPM_BUILD_ROOT%{_gtkdocdir}/poppler || :
+%{__rm} -rf $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
 %endif
 
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
@@ -374,7 +370,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.60
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.63
 
 %files devel
 %defattr(644,root,root,755)
@@ -471,5 +467,27 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pdf*
-%{_mandir}/man1/pdf*
+%attr(755,root,root) %{_bindir}/pdfdetach
+%attr(755,root,root) %{_bindir}/pdffonts
+%attr(755,root,root) %{_bindir}/pdfimages
+%attr(755,root,root) %{_bindir}/pdfinfo
+%attr(755,root,root) %{_bindir}/pdfseparate
+%attr(755,root,root) %{_bindir}/pdfsig
+%attr(755,root,root) %{_bindir}/pdftocairo
+%attr(755,root,root) %{_bindir}/pdftohtml
+%attr(755,root,root) %{_bindir}/pdftoppm
+%attr(755,root,root) %{_bindir}/pdftops
+%attr(755,root,root) %{_bindir}/pdftotext
+%attr(755,root,root) %{_bindir}/pdfunite
+%{_mandir}/man1/pdfdetach.1*
+%{_mandir}/man1/pdffonts.1*
+%{_mandir}/man1/pdfimages.1*
+%{_mandir}/man1/pdfinfo.1*
+%{_mandir}/man1/pdfseparate.1*
+%{_mandir}/man1/pdfsig.1*
+%{_mandir}/man1/pdftocairo.1*
+%{_mandir}/man1/pdftohtml.1*
+%{_mandir}/man1/pdftoppm.1*
+%{_mandir}/man1/pdftops.1*
+%{_mandir}/man1/pdftotext.1*
+%{_mandir}/man1/pdfunite.1*
