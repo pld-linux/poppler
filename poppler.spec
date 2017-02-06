@@ -35,7 +35,7 @@ BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gettext-tools
-%{?with_glib:BuildRequires:	glib2-devel >= 1:2.18.0}
+%{?with_glib:BuildRequires:	glib2-devel >= 1:2.41}
 BuildRequires:	gobject-introspection-devel >= 0.6.7
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
 BuildRequires:	lcms2-devel >= 2
@@ -46,8 +46,7 @@ BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	nss-devel >= 3
-# or openjpeg2-devel >= 2 with --enable-libopenjpeg=openjpeg2
-BuildRequires:	openjpeg-devel >= 1.5
+BuildRequires:	openjpeg2-devel >= 2
 BuildRequires:	pkgconfig >= 1:0.18
 # wanted cairo backends
 BuildRequires:	pkgconfig(cairo-pdf) >= %{cairo_ver}
@@ -60,7 +59,7 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
 BuildRequires:	zlib-devel
-Requires:	openjpeg >= 1.5
+Requires:	openjpeg2 >= 2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -157,7 +156,7 @@ Summary(pl.UTF-8):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
-Requires:	glib2 >= 1:2.18.0
+Requires:	glib2 >= 1:2.41
 
 %description glib
 GLib wrapper for poppler.
@@ -172,7 +171,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
-Requires:	glib2-devel >= 1:2.18.0
+Requires:	glib2-devel >= 1:2.41
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
