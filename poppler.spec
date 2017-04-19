@@ -11,12 +11,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.51.0
+Version:	0.53.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	342452b9dfd16f3c9912eb029fe0d4e2
+# Source0-md5:	943679f1030b9bc19a989f24121a282a
 URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= 5.0.0}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= 5.0.0}
@@ -41,7 +41,7 @@ BuildRequires:	gobject-introspection-devel >= 0.6.7
 BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtiff-devel
 BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
@@ -77,7 +77,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	curl-devel
 Requires:	lcms2-devel >= 2
-Requires:	libstdc++-devel
+Requires:	libstdc++-devel >= 6:4.7
 Requires:	nss-devel >= 3
 
 %description devel
@@ -369,7 +369,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README* TODO
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.66
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.67
 
 %files devel
 %defattr(644,root,root,755)
