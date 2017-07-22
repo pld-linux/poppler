@@ -8,25 +8,27 @@
 %bcond_without	glib	# disable glib wrapper
 
 %define		cairo_ver	1.10.0
+%define		qt4_ver		4.7.0
+%define		qt5_ver		5.0.0
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.53.0
+Version:	0.56.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	943679f1030b9bc19a989f24121a282a
+# Source0-md5:	31260c06e139d7270be4567cc8a4af97
 URL:		https://poppler.freedesktop.org/
-%{?with_qt5:BuildRequires:	Qt5Core-devel >= 5.0.0}
-%{?with_qt5:BuildRequires:	Qt5Gui-devel >= 5.0.0}
-%{?with_qt5:BuildRequires:	Qt5Test-devel >= 5.0.0}
-%{?with_qt5:BuildRequires:	Qt5Widgets-devel >= 5.0.0}
-%{?with_qt5:BuildRequires:	Qt5Xml-devel >= 5.0.0}
-%{?with_qt4:BuildRequires:	QtCore-devel >= 4.7.0}
-%{?with_qt4:BuildRequires:	QtGui-devel >= 4.7.0}
-%{?with_qt4:BuildRequires:	QtTest-devel >= 4.7.0}
-%{?with_qt4:BuildRequires:	QtXml-devel >= 4.7.0}
+%{?with_qt5:BuildRequires:	Qt5Core-devel >= %{qt5_ver}}
+%{?with_qt5:BuildRequires:	Qt5Gui-devel >= %{qt5_ver}}
+%{?with_qt5:BuildRequires:	Qt5Test-devel >= %{qt5_ver}}
+%{?with_qt5:BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}}
+%{?with_qt5:BuildRequires:	Qt5Xml-devel >= %{qt5_ver}}
+%{?with_qt4:BuildRequires:	QtCore-devel >= %{qt4_ver}}
+%{?with_qt4:BuildRequires:	QtGui-devel >= %{qt4_ver}}
+%{?with_qt4:BuildRequires:	QtTest-devel >= %{qt4_ver}}
+%{?with_qt4:BuildRequires:	QtXml-devel >= %{qt4_ver}}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.7
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
@@ -52,8 +54,8 @@ BuildRequires:	pkgconfig >= 1:0.18
 BuildRequires:	pkgconfig(cairo-pdf) >= %{cairo_ver}
 BuildRequires:	pkgconfig(cairo-ps) >= %{cairo_ver}
 BuildRequires:	pkgconfig(cairo-svg) >= %{cairo_ver}
-%{?with_qt4:BuildRequires:	qt4-build >= 4.4.0}
-%{?with_qt5:BuildRequires:	qt5-build >= 5.0.0}
+%{?with_qt4:BuildRequires:	qt4-build >= %{qt4_ver}}
+%{?with_qt5:BuildRequires:	qt5-build >= %{qt5_ver}}
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
@@ -196,9 +198,9 @@ Summary:	Qt4 wrapper for poppler
 Summary(pl.UTF-8):	Wrapper Qt4 dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	QtCore >= 4.4.0
-Requires:	QtGui >= 4.4.0
-Requires:	QtXml >= 4.4.0
+Requires:	QtCore >= %{qt4_ver}
+Requires:	QtGui >= %{qt4_ver}
+Requires:	QtXml >= %{qt4_ver}
 Provides:	poppler-Qt = %{version}-%{release}
 Obsoletes:	poppler-Qt < 0.24.4-2
 Obsoletes:	poppler-qt
@@ -215,9 +217,9 @@ Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt4 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-qt4 = %{version}-%{release}
-Requires:	QtCore-devel >= 4.4.0
-Requires:	QtGui-devel >= 4.4.0
-Requires:	QtXml-devel >= 4.4.0
+Requires:	QtCore-devel >= %{qt4_ver}
+Requires:	QtGui-devel >= %{qt4_ver}
+Requires:	QtXml-devel >= %{qt4_ver}
 Provides:	poppler-Qt-devel = %{version}-%{release}
 Obsoletes:	poppler-Qt-devel < 0.24.4-2
 Obsoletes:	poppler-qt-devel
@@ -261,10 +263,10 @@ Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt5 dla popplera
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-qt5 = %{version}-%{release}
-Requires:	Qt5Core-devel >= 5.0.0
-Requires:	Qt5Gui-devel >= 5.0.0
-Requires:	Qt5Widgets-devel >= 5.0.0
-Requires:	Qt5Xml-devel >= 5.0.0
+Requires:	Qt5Core-devel >= %{qt5_ver}
+Requires:	Qt5Gui-devel >= %{qt5_ver}
+Requires:	Qt5Widgets-devel >= %{qt5_ver}
+Requires:	Qt5Xml-devel >= %{qt5_ver}
 
 %description qt5-devel
 Header files for Qt5 wrapper for poppler.
