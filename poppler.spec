@@ -2,50 +2,43 @@
 # Conditional build:
 %bcond_without	apidocs # disable gtk-doc
 %bcond_without	cairo	# disable Cairo backend
-%bcond_without	qt4	# disable qt4 wrapper
 %bcond_without	qt5	# disable qt5 wrapper
 %bcond_without	cpp	# disable cpp wrapper
 %bcond_without	glib	# disable glib wrapper
 
 %define		cairo_ver	1.10.0
-%define		qt4_ver		4.7.0
 %define		qt5_ver		5.0.0
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.56.0
+Version:	0.62.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	31260c06e139d7270be4567cc8a4af97
+# Source0-md5:	42b801f2defaccb6b6cf1bf783ee1552
+Patch0:		%{name}-gtkdocdir.patch
 URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Test-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Xml-devel >= %{qt5_ver}}
-%{?with_qt4:BuildRequires:	QtCore-devel >= %{qt4_ver}}
-%{?with_qt4:BuildRequires:	QtGui-devel >= %{qt4_ver}}
-%{?with_qt4:BuildRequires:	QtTest-devel >= %{qt4_ver}}
-%{?with_qt4:BuildRequires:	QtXml-devel >= %{qt4_ver}}
-BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake >= 1:1.7
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
+BuildRequires:	cmake >= 3.1.0
 BuildRequires:	curl-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gettext-tools
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.41}
-BuildRequires:	gobject-introspection-devel >= 0.6.7
+BuildRequires:	gobject-introspection-devel >= 0.9.12
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
 BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel >= 6:4.7
 BuildRequires:	libtiff-devel
-BuildRequires:	libtool >= 2:1.5
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	nss-devel >= 3
 BuildRequires:	openjpeg2-devel >= 2
@@ -54,7 +47,6 @@ BuildRequires:	pkgconfig >= 1:0.18
 BuildRequires:	pkgconfig(cairo-pdf) >= %{cairo_ver}
 BuildRequires:	pkgconfig(cairo-ps) >= %{cairo_ver}
 BuildRequires:	pkgconfig(cairo-svg) >= %{cairo_ver}
-%{?with_qt4:BuildRequires:	qt4-build >= %{qt4_ver}}
 %{?with_qt5:BuildRequires:	qt5-build >= %{qt5_ver}}
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
@@ -62,6 +54,12 @@ BuildRequires:	which
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	openjpeg2 >= 2
+Obsoletes:	poppler-cpp-static
+Obsoletes:	poppler-glib-static
+Obsoletes:	poppler-qt4
+Obsoletes:	poppler-qt4-devel
+Obsoletes:	poppler-qt4-static
+Obsoletes:	poppler-qt5-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -140,18 +138,6 @@ Header files for cpp wrapper for poppler.
 %description cpp-devel -l pl.UTF-8
 Pliki nagłówkowe wrappera cpp dla popplera.
 
-%package cpp-static
-Summary:	Static version of cpp wrapper for poppler
-Summary(pl.UTF-8):	Statyczna wersja wrappera cpp dla popplera
-Group:		Development/Libraries
-Requires:	%{name}-cpp-devel = %{version}-%{release}
-
-%description cpp-static
-Static version of cpp wrapper for poppler.
-
-%description cpp-static -l pl.UTF-8
-Statyczna wersja wrappera cpp dla popplera.
-
 %package glib
 Summary:	GLib wrapper for poppler
 Summary(pl.UTF-8):	Wrapper GLib dla popplera
@@ -181,69 +167,6 @@ Header files for GLib wrapper for poppler.
 %description glib-devel -l pl.UTF-8
 Pliki nagłówkowe wrappera GLib dla popplera.
 
-%package glib-static
-Summary:	Static version of GLib wrapper for poppler
-Summary(pl.UTF-8):	Statyczna wersja wrappera GLib dla popplera
-Group:		Development/Libraries
-Requires:	%{name}-glib-devel = %{version}-%{release}
-
-%description glib-static
-Static version of GLib wrapper for poppler.
-
-%description glib-static -l pl.UTF-8
-Statyczna wersja wrappera GLib dla popplera.
-
-%package qt4
-Summary:	Qt4 wrapper for poppler
-Summary(pl.UTF-8):	Wrapper Qt4 dla popplera
-Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	QtCore >= %{qt4_ver}
-Requires:	QtGui >= %{qt4_ver}
-Requires:	QtXml >= %{qt4_ver}
-Provides:	poppler-Qt = %{version}-%{release}
-Obsoletes:	poppler-Qt < 0.24.4-2
-Obsoletes:	poppler-qt
-
-%description qt4
-Qt4 wrapper for poppler.
-
-%description qt4 -l pl.UTF-8
-Wrapper Qt4 dla popplera.
-
-%package qt4-devel
-Summary:	Header files for Qt4 wrapper for poppler
-Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt4 dla popplera
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	%{name}-qt4 = %{version}-%{release}
-Requires:	QtCore-devel >= %{qt4_ver}
-Requires:	QtGui-devel >= %{qt4_ver}
-Requires:	QtXml-devel >= %{qt4_ver}
-Provides:	poppler-Qt-devel = %{version}-%{release}
-Obsoletes:	poppler-Qt-devel < 0.24.4-2
-Obsoletes:	poppler-qt-devel
-
-%description qt4-devel
-Header files for Qt4 wrapper for poppler.
-
-%description qt4-devel -l pl.UTF-8
-Pliki nagłówkowe wrapper Qt4 dla popplera.
-
-%package qt4-static
-Summary:	Static version of Qt4 wrapper for poppler
-Summary(pl.UTF-8):	Statyczna wersja wrappera Qt4 dla popplera
-Group:		Development/Libraries
-Requires:	%{name}-qt4-devel = %{version}-%{release}
-Provides:	poppler-Qt-static = %{version}-%{release}
-Obsoletes:	poppler-Qt-static < 0.24.4-2
-Obsoletes:	poppler-qt-static
-
-%description qt4-static
-Static version of Qt4 wrapper for poppler.
-
-%description qt4-static -l pl.UTF-8
-Statyczna wersja wrappera Qt4 dla popplera.
 
 %package qt5
 Summary:	Qt5 wrapper for poppler
@@ -274,18 +197,6 @@ Header files for Qt5 wrapper for poppler.
 %description qt5-devel -l pl.UTF-8
 Pliki nagłówkowe wrapper Qt5 dla popplera.
 
-%package qt5-static
-Summary:	Static version of Qt5 wrapper for poppler
-Summary(pl.UTF-8):	Statyczna wersja wrappera Qt5 dla popplera
-Group:		Development/Libraries
-Requires:	%{name}-qt5-devel = %{version}-%{release}
-
-%description qt5-static
-Static version of Qt5 wrapper for poppler.
-
-%description qt5-static -l pl.UTF-8
-Statyczna wersja wrappera Qt5 dla popplera.
-
 %package progs
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
@@ -311,43 +222,49 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%{?with_apidocs:%{__gtkdocize}}
-%{__libtoolize}
-%{__aclocal} -I m4
-%{__autoconf} -f
-%{__autoheader}
-%{__automake}
-%configure \
-	--disable-gtk-test \
-	--enable-libcurl \
-	%{?with_apidocs:--enable-gtk-doc} \
-	%{!?with_cairo:--disable-cairo-output} \
-	%{!?with_cpp:--disable-poppler-cpp} \
-	%{!?with_glib:--disable-poppler-glib} \
-	%{!?with_qt4:--disable-poppler-qt4} \
-	%{!?with_qt5:--disable-poppler-qt5} \
-	--disable-silent-rules \
-	--enable-xpdf-headers \
-	--enable-zlib \
-	--enable-dependency-tracking \
-	--with-html-dir=%{_gtkdocdir}
+install -d build
+cd build
+%cmake .. \
+	-DENABLE_GTK_TESTS=OFF \
+	-DENABLE_LIBCURL=ON \
+	%{?with_apidocs:-DENABLE_GTK_DOC=ON} \
+	%{!?with_cairo:-DWITH_CAIRO=OFF} \
+	%{!?with_cpp:-DENABLE_CPP=OFF} \
+	%{!?with_glib:-DENABLE_GLIB=OFF} \
+	%{!?with_qt5:-DENABLE_QT5=OFF} \
+	-DENABLE_XPDF_HEADERS=ON \
+	-DENABLE_ZLIB=ON
+
+%{__make}
+cd ..
+
+install -d build-static
+cd build-static
+%cmake .. \
+	-DBUILD_SHARED_LIBS=OFF \
+	-DENABLE_GTK_TESTS=OFF \
+	-DENABLE_LIBCURL=ON \
+	%{?with_apidocs:-DENABLE_GTK_DOC=ON} \
+	%{!?with_cairo:-DWITH_CAIRO=OFF} \
+	%{!?with_cpp:-DENABLE_CPP=OFF} \
+	%{!?with_glib:-DENABLE_GLIB=OFF} \
+	%{!?with_qt5:-DENABLE_QT5=OFF} \
+	-DENABLE_XPDF_HEADERS=ON \
+	-DENABLE_ZLIB=ON
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
+%{__make} -C build-static install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%if %{without apidocs}
-# why it still installs them, brr
-%{__rm} -rf $RPM_BUILD_ROOT%{_gtkdocdir}/poppler
-%endif
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
+%{__make} -C build install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -361,17 +278,14 @@ rm -rf $RPM_BUILD_ROOT
 %post	glib -p /sbin/ldconfig
 %postun	glib -p /sbin/ldconfig
 
-%post	qt4 -p /sbin/ldconfig
-%postun	qt4 -p /sbin/ldconfig
-
 %post	qt5 -p /sbin/ldconfig
 %postun	qt5 -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README* TODO
+%doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.67
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.73
 
 %files devel
 %defattr(644,root,root,755)
@@ -408,11 +322,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler/cpp
 %{_pkgconfigdir}/poppler-cpp.pc
 
-%files cpp-static
-%defattr(644,root,root,755)
-%{_libdir}/libpoppler-cpp.a
-%endif
-
 %if %{with glib}
 %files glib
 %defattr(644,root,root,755)
@@ -427,28 +336,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/poppler-glib.pc
 %{_datadir}/gir-1.0/Poppler-0.18.gir
 
-%files glib-static
-%defattr(644,root,root,755)
-%{_libdir}/libpoppler-glib.a
-%endif
-
-%if %{with qt4}
-%files qt4
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt4.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt4.so.4
-
-%files qt4-devel
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt4.so
-%{_includedir}/poppler/qt4
-%{_pkgconfigdir}/poppler-qt4.pc
-
-%files qt4-static
-%defattr(644,root,root,755)
-%{_libdir}/libpoppler-qt4.a
-%endif
-
 %if %{with qt5}
 %files qt5
 %defattr(644,root,root,755)
@@ -460,11 +347,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpoppler-qt5.so
 %{_includedir}/poppler/qt5
 %{_pkgconfigdir}/poppler-qt5.pc
-
-%files qt5-static
-%defattr(644,root,root,755)
-%{_libdir}/libpoppler-qt5.a
-%endif
 
 %files progs
 %defattr(644,root,root,755)
