@@ -249,7 +249,7 @@ cd build-static
 	-DBUILD_SHARED_LIBS=OFF \
 	-DENABLE_GTK_TESTS=OFF \
 	-DENABLE_LIBCURL=ON \
-	%{?with_apidocs:-DENABLE_GTK_DOC=ON} \
+	-DENABLE_GTK_DOC=OFF \
 	%{!?with_cairo:-DWITH_CAIRO=OFF} \
 	%{!?with_cpp:-DENABLE_CPP=OFF} \
 	%{!?with_glib:-DENABLE_GLIB=OFF} \
