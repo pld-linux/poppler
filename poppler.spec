@@ -321,6 +321,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpoppler-cpp.so
 %{_includedir}/poppler/cpp
 %{_pkgconfigdir}/poppler-cpp.pc
+%endif
 
 %if %{with glib}
 %files glib
@@ -335,6 +336,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler-glib.pc
 %{_datadir}/gir-1.0/Poppler-0.18.gir
+%endif
 
 %if %{with qt5}
 %files qt5
@@ -347,6 +349,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpoppler-qt5.so
 %{_includedir}/poppler/qt5
 %{_pkgconfigdir}/poppler-qt5.pc
+%endif
 
 %files progs
 %defattr(644,root,root,755)
