@@ -18,6 +18,7 @@ Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
 # Source0-md5:	42b801f2defaccb6b6cf1bf783ee1552
 Patch0:		%{name}-gtkdocdir.patch
+Patch1:		%{name}-gtkdoc1_27.patch
 URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= %{qt5_ver}}
@@ -223,6 +224,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 install -d build
