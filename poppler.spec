@@ -11,14 +11,13 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.62.0
-Release:	1.1
+Version:	0.65.0
+Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	42b801f2defaccb6b6cf1bf783ee1552
+# Source0-md5:	b9a0af02e43deb26265f130343e90d78
 Patch0:		%{name}-gtkdocdir.patch
-Patch1:		%{name}-gtkdoc1_27.patch
 URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= %{qt5_ver}}
@@ -55,12 +54,8 @@ BuildRequires:	which
 BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	openjpeg2 >= 2
-Obsoletes:	poppler-cpp-static
-Obsoletes:	poppler-glib-static
-Obsoletes:	poppler-qt4
-Obsoletes:	poppler-qt4-devel
 Obsoletes:	poppler-qt4-static
-Obsoletes:	poppler-qt5-static
+Conflicts:	poppler61-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -139,6 +134,18 @@ Header files for cpp wrapper for poppler.
 %description cpp-devel -l pl.UTF-8
 Pliki nagłówkowe wrappera cpp dla popplera.
 
+%package cpp-static
+Summary:	Static version of cpp wrapper for poppler
+Summary(pl.UTF-8):	Statyczna wersja wrappera cpp dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-cpp-devel = %{version}-%{release}
+
+%description cpp-static
+Static version of cpp wrapper for poppler.
+
+%description cpp-static -l pl.UTF-8
+Statyczna wersja wrappera cpp dla popplera.
+
 %package glib
 Summary:	GLib wrapper for poppler
 Summary(pl.UTF-8):	Wrapper GLib dla popplera
@@ -168,6 +175,17 @@ Header files for GLib wrapper for poppler.
 %description glib-devel -l pl.UTF-8
 Pliki nagłówkowe wrappera GLib dla popplera.
 
+%package glib-static
+Summary:	Static version of GLib wrapper for poppler
+Summary(pl.UTF-8):	Statyczna wersja wrappera GLib dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-glib-devel = %{version}-%{release}
+
+%description glib-static
+Static version of GLib wrapper for poppler.
+
+%description glib-static -l pl.UTF-8
+Statyczna wersja wrappera GLib dla popplera.
 
 %package qt5
 Summary:	Qt5 wrapper for poppler
@@ -198,6 +216,18 @@ Header files for Qt5 wrapper for poppler.
 %description qt5-devel -l pl.UTF-8
 Pliki nagłówkowe wrapper Qt5 dla popplera.
 
+%package qt5-static
+Summary:	Static version of Qt5 wrapper for poppler
+Summary(pl.UTF-8):	Statyczna wersja wrappera Qt5 dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-qt5-devel = %{version}-%{release}
+
+%description qt5-static
+Static version of Qt5 wrapper for poppler.
+
+%description qt5-static -l pl.UTF-8
+Statyczna wersja wrappera Qt5 dla popplera.
+
 %package progs
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
@@ -224,7 +254,6 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 install -d build
@@ -287,7 +316,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.73
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.76
 
 %files devel
 %defattr(644,root,root,755)
@@ -323,6 +352,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpoppler-cpp.so
 %{_includedir}/poppler/cpp
 %{_pkgconfigdir}/poppler-cpp.pc
+
+%files cpp-static
+%defattr(644,root,root,755)
+%{_libdir}/libpoppler-cpp.a
 %endif
 
 %if %{with glib}
@@ -338,7 +371,12 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler-glib.pc
 %{_datadir}/gir-1.0/Poppler-0.18.gir
+
+%files glib-static
+%defattr(644,root,root,755)
+%{_libdir}/libpoppler-glib.a
 %endif
+
 
 %if %{with qt5}
 %files qt5
@@ -351,6 +389,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpoppler-qt5.so
 %{_includedir}/poppler/qt5
 %{_pkgconfigdir}/poppler-qt5.pc
+
+%files qt5-static
+%defattr(644,root,root,755)
+%{_libdir}/libpoppler-qt5.a
 %endif
 
 %files progs
