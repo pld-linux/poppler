@@ -55,7 +55,6 @@ BuildRequires:	xz
 BuildRequires:	zlib-devel
 Requires:	openjpeg2 >= 2
 Obsoletes:	poppler-qt4-static
-Conflicts:	poppler61-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -75,6 +74,7 @@ Requires:	curl-devel
 Requires:	lcms2-devel >= 2
 Requires:	libstdc++-devel >= 6:4.7
 Requires:	nss-devel >= 3
+Conflicts:	poppler0.61-devel
 
 %description devel
 Header files for the Poppler library.
