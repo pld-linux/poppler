@@ -1,22 +1,22 @@
 #
 # Conditional build:
-%bcond_without	apidocs # disable gtk-doc
-%bcond_without	cairo	# disable Cairo backend
-%bcond_without	qt5	# disable qt5 wrapper
-%bcond_without	cpp	# disable cpp wrapper
-%bcond_without	glib	# disable glib wrapper
+%bcond_without	apidocs # gtk-doc API documentation
+%bcond_without	cairo	# Cairo backend
+%bcond_without	qt5	# Qt 5 wrapper
+%bcond_without	cpp	# C++ wrapper
+%bcond_without	glib	# GLib wrapper
 
 %define		cairo_ver	1.10.0
 %define		qt5_ver		5.0.0
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.72.0
+Version:	0.75.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	5a18b02019daf33559eceb30e5ee2b6b
+# Source0-md5:	3fb4ca803d989742695ca586c5cc489e
 Patch0:		%{name}-gtkdocdir.patch
 URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= %{qt5_ver}}
@@ -260,15 +260,15 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 install -d build
 cd build
 %cmake .. \
-	-DENABLE_GTK_TESTS=OFF \
-	-DENABLE_LIBCURL=ON \
-	%{?with_apidocs:-DENABLE_GTK_DOC=ON} \
-	%{!?with_cairo:-DWITH_CAIRO=OFF} \
 	%{!?with_cpp:-DENABLE_CPP=OFF} \
 	%{!?with_glib:-DENABLE_GLIB=OFF} \
+	%{?with_apidocs:-DENABLE_GTK_DOC=ON} \
+	-DENABLE_GTK_TESTS=OFF \
+	-DENABLE_LIBCURL=ON \
 	%{!?with_qt5:-DENABLE_QT5=OFF} \
-	-DENABLE_XPDF_HEADERS=ON \
-	-DENABLE_ZLIB=ON
+	-DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
+	-DENABLE_ZLIB=ON \
+	%{!?with_cairo:-DWITH_CAIRO=OFF}
 
 %{__make}
 cd ..
@@ -277,15 +277,14 @@ install -d build-static
 cd build-static
 %cmake .. \
 	-DBUILD_SHARED_LIBS=OFF \
-	-DENABLE_GTK_TESTS=OFF \
-	-DENABLE_LIBCURL=ON \
-	-DENABLE_GTK_DOC=OFF \
-	%{!?with_cairo:-DWITH_CAIRO=OFF} \
 	%{!?with_cpp:-DENABLE_CPP=OFF} \
 	%{!?with_glib:-DENABLE_GLIB=OFF} \
+	-DENABLE_GTK_DOC=OFF \
+	-DENABLE_GTK_TESTS=OFF \
+	-DENABLE_LIBCURL=ON \
 	%{!?with_qt5:-DENABLE_QT5=OFF} \
-	-DENABLE_XPDF_HEADERS=ON \
-	-DENABLE_ZLIB=ON
+	-DENABLE_ZLIB=ON \
+	%{!?with_cairo:-DWITH_CAIRO=OFF}
 
 %{__make}
 
@@ -317,7 +316,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.83
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.86
 
 %files devel
 %defattr(644,root,root,755)
@@ -378,7 +377,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libpoppler-glib.a
 %endif
 
-
 %if %{with qt5}
 %files qt5
 %defattr(644,root,root,755)
@@ -398,6 +396,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pdfattach
 %attr(755,root,root) %{_bindir}/pdfdetach
 %attr(755,root,root) %{_bindir}/pdffonts
 %attr(755,root,root) %{_bindir}/pdfimages
@@ -410,6 +409,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pdftops
 %attr(755,root,root) %{_bindir}/pdftotext
 %attr(755,root,root) %{_bindir}/pdfunite
+%{_mandir}/man1/pdfattach.1*
 %{_mandir}/man1/pdfdetach.1*
 %{_mandir}/man1/pdffonts.1*
 %{_mandir}/man1/pdfimages.1*
