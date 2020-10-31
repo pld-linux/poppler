@@ -3,30 +3,37 @@
 %bcond_without	apidocs # gtk-doc API documentation
 %bcond_without	cairo	# Cairo backend
 %bcond_without	qt5	# Qt 5 wrapper
+%bcond_with	qt6	# Qt 6 wrapper
 %bcond_without	cpp	# C++ wrapper
 %bcond_without	glib	# GLib wrapper
 
 %define		cairo_ver	1.10.0
-%define		qt5_ver		5.0.0
+%define		qt5_ver		5.5.0
+%define		qt6_ver		6.0.0
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	0.86.1
+Version:	20.10.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	2a638739f29e82a0a57b633ea39c87f3
+# Source0-md5:	1103acc31277936a138613c97b38b82c
 Patch0:		%{name}-gtkdocdir.patch
+Patch1:		%{name}-include.patch
 URL:		https://poppler.freedesktop.org/
 %{?with_qt5:BuildRequires:	Qt5Core-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Gui-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Test-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}}
 %{?with_qt5:BuildRequires:	Qt5Xml-devel >= %{qt5_ver}}
+%{?with_qt6:BuildRequires:	Qt6Core-devel >= %{qt6_ver}}
+%{?with_qt6:BuildRequires:	Qt6Gui-devel >= %{qt6_ver}}
+%{?with_qt6:BuildRequires:	Qt6Test-devel >= %{qt6_ver}}
+%{?with_qt6:BuildRequires:	Qt6Widgets-devel >= %{qt6_ver}}
 BuildRequires:	boost-devel >= 1.58.0
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
-BuildRequires:	cmake >= 3.1.0
+BuildRequires:	cmake >= 3.5.0
 BuildRequires:	curl-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
@@ -50,6 +57,8 @@ BuildRequires:	pkgconfig(cairo-pdf) >= %{cairo_ver}
 BuildRequires:	pkgconfig(cairo-ps) >= %{cairo_ver}
 BuildRequires:	pkgconfig(cairo-svg) >= %{cairo_ver}
 %{?with_qt5:BuildRequires:	qt5-build >= %{qt5_ver}}
+%{?with_qt6:BuildRequires:	qt6-build >= %{qt6_ver}}
+BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
@@ -101,9 +110,7 @@ Summary:	Poppler library API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki Poppler
 Group:		Documentation
 Requires:	gtk-doc-common
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
+%{?noarchpackage}
 
 %description apidocs
 Poppler library API documentation.
@@ -256,6 +263,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 install -d build
@@ -267,6 +275,7 @@ cd build
 	-DENABLE_GTK_TESTS=OFF \
 	-DENABLE_LIBCURL=ON \
 	%{!?with_qt5:-DENABLE_QT5=OFF} \
+	%{!?with_qt6:-DENABLE_QT6=OFF} \
 	-DENABLE_UNSTABLE_API_ABI_HEADERS=ON \
 	-DENABLE_ZLIB=ON \
 	%{!?with_cairo:-DWITH_CAIRO=OFF}
@@ -317,7 +326,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.97
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.103
 
 %files devel
 %defattr(644,root,root,755)

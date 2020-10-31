@@ -1,0 +1,8 @@
+--- poppler-20.10.0/qt5/tests/check_annotations.cpp.orig	2020-10-01 21:44:58.000000000 +0200
++++ poppler-20.10.0/qt5/tests/check_annotations.cpp	2020-10-31 18:19:05.431433716 +0100
+@@ -1,4 +1,5 @@
+ #include <cmath>
++#include <functional>
+ #include <memory>
+ #include <sstream>
+ 
