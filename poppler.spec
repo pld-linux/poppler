@@ -6,6 +6,7 @@
 %bcond_with	qt6	# Qt 6 wrapper
 %bcond_without	cpp	# C++ wrapper
 %bcond_without	glib	# GLib wrapper
+%bcond_without	static_libs	# don't build static libraries
 
 %define		cairo_ver	1.10.0
 %define		qt5_ver		5.5.0
@@ -283,6 +284,7 @@ cd build
 %{__make}
 cd ..
 
+%if %{with static_libs}
 install -d build-static
 cd build-static
 %cmake .. \
@@ -297,12 +299,15 @@ cd build-static
 	%{!?with_cairo:-DWITH_CAIRO=OFF}
 
 %{__make}
+%endif
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with static_libs}
 %{__make} -C build-static install \
 	DESTDIR=$RPM_BUILD_ROOT
+%endif
 
 %{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
@@ -341,9 +346,11 @@ rm -rf $RPM_BUILD_ROOT
 %{?with_cairo:%{_pkgconfigdir}/poppler-cairo.pc}
 %{_pkgconfigdir}/poppler-splash.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler.a
+%endif
 
 %if %{with apidocs}
 %files apidocs
@@ -363,9 +370,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler/cpp
 %{_pkgconfigdir}/poppler-cpp.pc
 
+%if %{with static_libs}
 %files cpp-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-cpp.a
+%endif
 %endif
 
 %if %{with glib}
@@ -382,9 +391,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_pkgconfigdir}/poppler-glib.pc
 %{_datadir}/gir-1.0/Poppler-0.18.gir
 
+%if %{with static_libs}
 %files glib-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-glib.a
+%endif
 %endif
 
 %if %{with qt5}
@@ -399,9 +410,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/poppler/qt5
 %{_pkgconfigdir}/poppler-qt5.pc
 
+%if %{with static_libs}
 %files qt5-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-qt5.a
+%endif
 %endif
 
 %files progs
