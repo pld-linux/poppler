@@ -14,12 +14,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	20.12.1
+Version:	21.03.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	eb4a8465b03ec58cc6a3277aa7d4fa7b
+# Source0-md5:	641a9f382c4166d5728f1f28f163de58
 Patch0:		%{name}-gtkdocdir.patch
 Patch1:		%{name}-include.patch
 URL:		https://poppler.freedesktop.org/
@@ -331,7 +331,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.105
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.108
 
 %files devel
 %defattr(644,root,root,755)
