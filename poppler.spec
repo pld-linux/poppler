@@ -9,17 +9,17 @@
 %bcond_without	static_libs	# don't build static libraries
 
 %define		cairo_ver	1.10.0
-%define		qt5_ver		5.5.0
+%define		qt5_ver		5.9.0
 %define		qt6_ver		6.0.0
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	21.03.0
+Version:	21.06.1
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	641a9f382c4166d5728f1f28f163de58
+# Source0-md5:	dbad7032b680720ea6d570fd608b849e
 Patch0:		%{name}-gtkdocdir.patch
 Patch1:		%{name}-include.patch
 URL:		https://poppler.freedesktop.org/
@@ -34,13 +34,13 @@ URL:		https://poppler.freedesktop.org/
 %{?with_qt6:BuildRequires:	Qt6Widgets-devel >= %{qt6_ver}}
 BuildRequires:	boost-devel >= 1.58.0
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
-BuildRequires:	cmake >= 3.5.0
+BuildRequires:	cmake >= 3.10.0
 BuildRequires:	curl-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
 BuildRequires:	freetype-devel >= 2.0
 BuildRequires:	gettext-tools
-%{?with_glib:BuildRequires:	glib2-devel >= 1:2.41}
+%{?with_glib:BuildRequires:	glib2-devel >= 1:2.56}
 %{?with_glib:BuildRequires:	gobject-introspection-devel >= 0.9.12}
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
 BuildRequires:	lcms2-devel >= 2
@@ -162,7 +162,7 @@ Summary(pl.UTF-8):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
-Requires:	glib2 >= 1:2.41
+Requires:	glib2 >= 1:2.56
 
 %description glib
 GLib wrapper for poppler.
@@ -177,7 +177,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
-Requires:	glib2-devel >= 1:2.41
+Requires:	glib2-devel >= 1:2.56
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
@@ -331,7 +331,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.108
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.111
 
 %files devel
 %defattr(644,root,root,755)
