@@ -59,6 +59,7 @@ BuildRequires:	pkgconfig(cairo-ps) >= %{cairo_ver}
 BuildRequires:	pkgconfig(cairo-svg) >= %{cairo_ver}
 %{?with_qt5:BuildRequires:	qt5-build >= %{qt5_ver}}
 %{?with_qt6:BuildRequires:	qt6-build >= %{qt6_ver}}
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sed >= 4.0
 BuildRequires:	tar >= 1:1.22
@@ -338,6 +339,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libpoppler.so
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
+%{_includedir}/poppler/poppler_private_export.h
 %{_includedir}/poppler/[ABCDEFGHJLMNOPRSTUVX]*.h
 %{_includedir}/poppler/fofi
 %{_includedir}/poppler/goo
