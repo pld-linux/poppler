@@ -10,16 +10,16 @@
 
 %define		cairo_ver	1.10.0
 %define		qt5_ver		5.9.0
-%define		qt6_ver		6.0.0
+%define		qt6_ver		6.2
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	21.08.0
+Version:	22.04.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	60d5be55cc080d602bf58daf6825b124
+# Source0-md5:	8c55071a273a25d582f51d91861b4379
 Patch0:		%{name}-gtkdocdir.patch
 Patch1:		%{name}-include.patch
 URL:		https://poppler.freedesktop.org/
@@ -38,16 +38,19 @@ BuildRequires:	cmake >= 3.10.0
 BuildRequires:	curl-devel
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.0.0
-BuildRequires:	freetype-devel >= 2.0
+BuildRequires:	freetype-devel >= 1:2.8
+# -std=c11
+BuildRequires:	gcc >= 6:4.7
 BuildRequires:	gettext-tools
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.56}
 %{?with_glib:BuildRequires:	gobject-introspection-devel >= 0.9.12}
+BuildRequires:	gperf
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
 BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
-# -std=c++14
-BuildRequires:	libstdc++-devel >= 6:5.0
+# -std=c++17
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	libtiff-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	nss-devel >= 3.19
@@ -66,8 +69,8 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
 BuildRequires:	zlib-devel
+Requires:	freetype >= 1:2.8
 Requires:	openjpeg2 >= 2
-Obsoletes:	poppler-qt4-static
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -85,7 +88,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	curl-devel
 Requires:	lcms2-devel >= 2
-Requires:	libstdc++-devel >= 6:5.0
+Requires:	libstdc++-devel >= 6:7
 Requires:	nss-devel >= 3.19
 Conflicts:	poppler0.61-devel
 
@@ -244,9 +247,9 @@ Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
 Group:		Applications/Publishing
 Provides:	pdftops
-Obsoletes:	pdftohtml
-Obsoletes:	pdftohtml-pdftops
-Obsoletes:	poppler-utils
+Obsoletes:	pdftohtml < 0.40
+Obsoletes:	pdftohtml-pdftops < 0.40
+Obsoletes:	poppler-utils < 0.5.0-2
 Obsoletes:	xpdf-tools
 
 %description progs
@@ -266,6 +269,8 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %setup -q
 %patch0 -p1
 %patch1 -p1
+
+%{__sed} -i -e '/set(_known_build_types/ s/)/;PLD)/' cmake/modules/PopplerMacros.cmake
 
 %build
 install -d build
@@ -332,7 +337,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.112
+%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.120
 
 %files devel
 %defattr(644,root,root,755)
