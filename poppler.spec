@@ -3,7 +3,7 @@
 %bcond_without	apidocs # gtk-doc API documentation
 %bcond_without	cairo	# Cairo backend
 %bcond_without	qt5	# Qt 5 wrapper
-%bcond_with	qt6	# Qt 6 wrapper
+%bcond_without	qt6	# Qt 6 wrapper
 %bcond_without	cpp	# C++ wrapper
 %bcond_without	glib	# GLib wrapper
 %bcond_without	static_libs	# don't build static libraries
@@ -15,7 +15,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	22.04.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
@@ -242,6 +242,47 @@ Static version of Qt5 wrapper for poppler.
 %description qt5-static -l pl.UTF-8
 Statyczna wersja wrappera Qt5 dla popplera.
 
+%package qt6
+Summary:	Qt6 wrapper for poppler
+Summary(pl.UTF-8):	Wrapper Qt6 dla popplera
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description qt6
+Qt6 wrapper for poppler.
+
+%description qt6 -l pl.UTF-8
+Wrapper Qt6 dla popplera.
+
+%package qt6-devel
+Summary:	Header files for Qt6 wrapper for poppler
+Summary(pl.UTF-8):	Pliki nagłówkowe wrappera Qt6 dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-qt6 = %{version}-%{release}
+Requires:	Qt6Core-devel >= %{qt5_ver}
+Requires:	Qt6Gui-devel >= %{qt5_ver}
+Requires:	Qt6Widgets-devel >= %{qt5_ver}
+Requires:	Qt6Xml-devel >= %{qt5_ver}
+
+%description qt6-devel
+Header files for Qt6 wrapper for poppler.
+
+%description qt6-devel -l pl.UTF-8
+Pliki nagłówkowe wrapper Qt6 dla popplera.
+
+%package qt6-static
+Summary:	Static version of Qt6 wrapper for poppler
+Summary(pl.UTF-8):	Statyczna wersja wrappera Qt6 dla popplera
+Group:		Development/Libraries
+Requires:	%{name}-qt6-devel = %{version}-%{release}
+
+%description qt6-static
+Static version of Qt6 wrapper for poppler.
+
+%description qt6-static -l pl.UTF-8
+Statyczna wersja wrappera Qt6 dla popplera.
+
 %package progs
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
@@ -419,6 +460,25 @@ rm -rf $RPM_BUILD_ROOT
 %files qt5-static
 %defattr(644,root,root,755)
 %{_libdir}/libpoppler-qt5.a
+%endif
+%endif
+
+%if %{with qt6}
+%files qt6
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpoppler-qt6.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt6.so.3
+
+%files qt6-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libpoppler-qt6.so
+%{_includedir}/poppler/qt6
+%{_pkgconfigdir}/poppler-qt6.pc
+
+%if %{with static_libs}
+%files qt6-static
+%defattr(644,root,root,755)
+%{_libdir}/libpoppler-qt6.a
 %endif
 %endif
 
