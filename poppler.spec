@@ -14,12 +14,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	23.03.0
+Version:	24.08.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	342c6661d7dcb5213789acff238912cb
+# Source0-md5:	5edd19a7ef270793374a3a5599bf872f
 Patch0:		%{name}-gtkdocdir.patch
 Patch1:		%{name}-include.patch
 URL:		https://poppler.freedesktop.org/
@@ -378,11 +378,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler.so.126
+%ghost %{_libdir}/libpoppler.so.1??
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler.so
+%{_libdir}/libpoppler.so
 %dir %{_includedir}/poppler
 %{_includedir}/poppler/poppler-config.h
 %{_includedir}/poppler/poppler_private_export.h
@@ -408,11 +408,11 @@ rm -rf $RPM_BUILD_ROOT
 %files cpp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-cpp.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-cpp.so.0
+%ghost %{_libdir}/libpoppler-cpp.so.?
 
 %files cpp-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-cpp.so
+%{_libdir}/libpoppler-cpp.so
 %{_includedir}/poppler/cpp
 %{_pkgconfigdir}/poppler-cpp.pc
 
@@ -427,12 +427,12 @@ rm -rf $RPM_BUILD_ROOT
 %files glib
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-glib.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-glib.so.8
+%ghost %{_libdir}/libpoppler-glib.so.8
 %{_libdir}/girepository-1.0/Poppler-0.18.typelib
 
 %files glib-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-glib.so
+%{_libdir}/libpoppler-glib.so
 %{_includedir}/poppler/glib
 %{_pkgconfigdir}/poppler-glib.pc
 %{_datadir}/gir-1.0/Poppler-0.18.gir
@@ -448,11 +448,11 @@ rm -rf $RPM_BUILD_ROOT
 %files qt5
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt5.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt5.so.1
+%ghost %{_libdir}/libpoppler-qt5.so.1
 
 %files qt5-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt5.so
+%{_libdir}/libpoppler-qt5.so
 %{_includedir}/poppler/qt5
 %{_pkgconfigdir}/poppler-qt5.pc
 
@@ -467,11 +467,11 @@ rm -rf $RPM_BUILD_ROOT
 %files qt6
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-qt6.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libpoppler-qt6.so.3
+%ghost %{_libdir}/libpoppler-qt6.so.3
 
 %files qt6-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libpoppler-qt6.so
+%{_libdir}/libpoppler-qt6.so
 %{_includedir}/poppler/qt6
 %{_pkgconfigdir}/poppler-qt6.pc
 
