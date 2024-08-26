@@ -8,8 +8,8 @@
 %bcond_without	glib	# GLib wrapper
 %bcond_without	static_libs	# don't build static libraries
 
-%define		cairo_ver	1.10.0
-%define		qt5_ver		5.9.0
+%define		cairo_ver	1.16.0
+%define		qt5_ver		5.15
 %define		qt6_ver		6.2
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
@@ -32,28 +32,29 @@ URL:		https://poppler.freedesktop.org/
 %{?with_qt6:BuildRequires:	Qt6Gui-devel >= %{qt6_ver}}
 %{?with_qt6:BuildRequires:	Qt6Test-devel >= %{qt6_ver}}
 %{?with_qt6:BuildRequires:	Qt6Widgets-devel >= %{qt6_ver}}
-BuildRequires:	boost-devel >= 1.58.0
+BuildRequires:	boost-devel >= 1.74.0
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
-BuildRequires:	cmake >= 3.10.0
-BuildRequires:	curl-devel
+BuildRequires:	cmake >= 3.22.0
+BuildRequires:	curl-devel >= 7.68
 BuildRequires:	docbook-dtd412-xml
-BuildRequires:	fontconfig-devel >= 2.0.0
-BuildRequires:	freetype-devel >= 1:2.8
+BuildRequires:	fontconfig-devel >= 2.13
+BuildRequires:	freetype-devel >= 1:2.11
 # -std=c11
 BuildRequires:	gcc >= 6:4.7
 BuildRequires:	gettext-tools
-%{?with_glib:BuildRequires:	glib2-devel >= 1:2.56}
-%{?with_glib:BuildRequires:	gobject-introspection-devel >= 0.9.12}
+%{?with_glib:BuildRequires:	glib2-devel >= 1:2.72}
+%{?with_glib:BuildRequires:	gobject-introspection-devel >= 1.72.0}
 BuildRequires:	gperf
+BuildRequires:	gpgme-c++-devel >= 1.19
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
-BuildRequires:	lcms2-devel >= 2
+BuildRequires:	lcms2-devel >= 2.9
 BuildRequires:	libjpeg-devel
 BuildRequires:	libpng-devel
 # -std=c++17
 BuildRequires:	libstdc++-devel >= 6:7
-BuildRequires:	libtiff-devel
+BuildRequires:	libtiff-devel >= 4.3
 BuildRequires:	libxml2-devel >= 2.0
-BuildRequires:	nss-devel >= 3.19
+BuildRequires:	nss-devel >= 3.68
 BuildRequires:	openjpeg2-devel >= 2
 BuildRequires:	pkgconfig >= 1:0.18
 # wanted cairo backends
@@ -69,7 +70,12 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
 BuildRequires:	zlib-devel
-Requires:	freetype >= 1:2.8
+Requires:	curl-libs >= 7.68
+Requires:	fontconfig-libs >= 2.13
+Requires:	freetype >= 1:2.11
+Requires:	gpgme-c++ >= 1.19
+Requires:	lcms2 >= 2.9
+Requires:	libtiff >= 4.3
 Requires:	openjpeg2 >= 2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -86,10 +92,10 @@ Summary:	Poppler header files
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	curl-devel
-Requires:	lcms2-devel >= 2
+Requires:	curl-devel >= 7.68
+Requires:	lcms2-devel >= 2.9
 Requires:	libstdc++-devel >= 6:7
-Requires:	nss-devel >= 3.19
+Requires:	nss-devel >= 3.68
 Conflicts:	poppler0.61-devel
 
 %description devel
@@ -166,7 +172,7 @@ Summary(pl.UTF-8):	Wrapper GLib dla popplera
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_cairo:Requires:	cairo >= %{cairo_ver}}
-Requires:	glib2 >= 1:2.56
+Requires:	glib2 >= 1:2.72
 
 %description glib
 GLib wrapper for poppler.
@@ -181,7 +187,7 @@ Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Requires:	%{name}-glib = %{version}-%{release}
 %{?with_cairo:Requires:	cairo-devel >= %{cairo_ver}}
-Requires:	glib2-devel >= 1:2.56
+Requires:	glib2-devel >= 1:2.72
 
 %description glib-devel
 Header files for GLib wrapper for poppler.
@@ -314,9 +320,7 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 %{__sed} -i -e '/set(_known_build_types/ s/)/;PLD)/' cmake/modules/PopplerMacros.cmake
 
 %build
-install -d build
-cd build
-%cmake .. \
+%cmake -B build \
 	%{!?with_cpp:-DENABLE_CPP=OFF} \
 	%{!?with_glib:-DENABLE_GLIB=OFF} \
 	%{?with_apidocs:-DENABLE_GTK_DOC=ON} \
@@ -328,13 +332,10 @@ cd build
 	-DENABLE_ZLIB=ON \
 	%{!?with_cairo:-DWITH_CAIRO=OFF}
 
-%{__make}
-cd ..
+%{__make} -C build
 
 %if %{with static_libs}
-install -d build-static
-cd build-static
-%cmake .. \
+%cmake -B build-static \
 	-DBUILD_SHARED_LIBS=OFF \
 	%{!?with_cpp:-DENABLE_CPP=OFF} \
 	%{!?with_glib:-DENABLE_GLIB=OFF} \
@@ -342,10 +343,11 @@ cd build-static
 	-DENABLE_GTK_TESTS=OFF \
 	-DENABLE_LIBCURL=ON \
 	%{!?with_qt5:-DENABLE_QT5=OFF} \
+	%{!?with_qt6:-DENABLE_QT6=OFF} \
 	-DENABLE_ZLIB=ON \
 	%{!?with_cairo:-DWITH_CAIRO=OFF}
 
-%{__make}
+%{__make} -C build-static
 %endif
 
 %install
@@ -378,7 +380,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%ghost %{_libdir}/libpoppler.so.1??
+%ghost %{_libdir}/libpoppler.so.140
 
 %files devel
 %defattr(644,root,root,755)
@@ -408,7 +410,7 @@ rm -rf $RPM_BUILD_ROOT
 %files cpp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-cpp.so.*.*.*
-%ghost %{_libdir}/libpoppler-cpp.so.?
+%ghost %{_libdir}/libpoppler-cpp.so.1
 
 %files cpp-devel
 %defattr(644,root,root,755)
