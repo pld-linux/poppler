@@ -377,6 +377,9 @@ rm -rf $RPM_BUILD_ROOT
 %post	qt5 -p /sbin/ldconfig
 %postun	qt5 -p /sbin/ldconfig
 
+%post	qt6 -p /sbin/ldconfig
+%postun	qt6 -p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
