@@ -45,8 +45,8 @@ BuildRequires:	gettext-tools
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.72}
 %{?with_glib:BuildRequires:	gobject-introspection-devel >= 1.72.0}
 BuildRequires:	gperf
-BuildRequires:	gpgme-devel >= 1.19
 BuildRequires:	gpgme-c++-devel >= 1.19
+BuildRequires:	gpgme-devel >= 1.19
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
 BuildRequires:	lcms2-devel >= 2.9
 BuildRequires:	libjpeg-devel
