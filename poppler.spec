@@ -14,12 +14,12 @@
 Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
-Version:	24.08.0
+Version:	25.07.0
 Release:	1
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
-# Source0-md5:	5edd19a7ef270793374a3a5599bf872f
+# Source0-md5:	7f8dc7516d3a5daf298aa724dc7cbef9
 Patch0:		%{name}-gtkdocdir.patch
 Patch1:		%{name}-include.patch
 URL:		https://poppler.freedesktop.org/
@@ -315,8 +315,8 @@ Pakiet zawiera zestaw narzędzi do plików PDF. Programy te umożliwiają
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch -P0 -p1
+%patch -P1 -p1
 
 %{__sed} -i -e '/set(_known_build_types/ s/)/;PLD)/' cmake/modules/PopplerMacros.cmake
 
@@ -384,7 +384,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README*
 %attr(755,root,root) %{_libdir}/libpoppler.so.*.*.*
-%ghost %{_libdir}/libpoppler.so.140
+%ghost %{_libdir}/libpoppler.so.151
 
 %files devel
 %defattr(644,root,root,755)
@@ -414,7 +414,7 @@ rm -rf $RPM_BUILD_ROOT
 %files cpp
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libpoppler-cpp.so.*.*.*
-%ghost %{_libdir}/libpoppler-cpp.so.1
+%ghost %{_libdir}/libpoppler-cpp.so.2
 
 %files cpp-devel
 %defattr(644,root,root,755)
