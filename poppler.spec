@@ -15,7 +15,7 @@ Summary:	PDF rendering library
 Summary(pl.UTF-8):	Biblioteka renderująca PDF
 Name:		poppler
 Version:	25.07.0
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Libraries
 Source0:	https://poppler.freedesktop.org/%{name}-%{version}.tar.xz
@@ -35,7 +35,7 @@ URL:		https://poppler.freedesktop.org/
 BuildRequires:	boost-devel >= 1.74.0
 %{?with_cairo:BuildRequires:	cairo-devel >= %{cairo_ver}}
 BuildRequires:	cmake >= 3.22.0
-BuildRequires:	curl-devel >= 7.68
+BuildRequires:	curl-devel >= 7.81
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	fontconfig-devel >= 2.13
 BuildRequires:	freetype-devel >= 1:2.11
@@ -45,11 +45,14 @@ BuildRequires:	gettext-tools
 %{?with_glib:BuildRequires:	glib2-devel >= 1:2.72}
 %{?with_glib:BuildRequires:	gobject-introspection-devel >= 1.72.0}
 BuildRequires:	gperf
-BuildRequires:	gpgme-c++-devel >= 1.19
 BuildRequires:	gpgme-devel >= 1.19
+BuildRequires:	gpgmepp-devel >= 1.19
 %{?with_apidocs:BuildRequires:	gtk-doc >= 1.14}
-BuildRequires:	lcms2-devel >= 2.9
-BuildRequires:	libjpeg-devel
+# for sanitizers
+#BuildRequires:	kf5-extra-cmake-modules >= 1.6.0
+BuildRequires:	lcms2-devel >= 2.12
+# ijg libjpeg >= 8 or libjpeg-turbo >= 1.1.0
+BuildRequires:	libjpeg-devel >= 8
 BuildRequires:	libpng-devel
 # -std=c++17
 BuildRequires:	libstdc++-devel >= 6:7
@@ -71,11 +74,11 @@ BuildRequires:	tar >= 1:1.22
 BuildRequires:	which
 BuildRequires:	xz
 BuildRequires:	zlib-devel
-Requires:	curl-libs >= 7.68
+Requires:	curl-libs >= 7.81
 Requires:	fontconfig-libs >= 2.13
 Requires:	freetype >= 1:2.11
-Requires:	gpgme-c++ >= 1.19
-Requires:	lcms2 >= 2.9
+Requires:	gpgmepp >= 1.19
+Requires:	lcms2 >= 2.12
 Requires:	libtiff >= 4.3
 Requires:	openjpeg2 >= 2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -93,8 +96,8 @@ Summary:	Poppler header files
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Poppler
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	curl-devel >= 7.68
-Requires:	lcms2-devel >= 2.9
+Requires:	curl-devel >= 7.81
+Requires:	lcms2-devel >= 2.12
 Requires:	libstdc++-devel >= 6:7
 Requires:	nss-devel >= 3.68
 Conflicts:	poppler0.61-devel
